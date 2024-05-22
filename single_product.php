@@ -115,216 +115,144 @@ include_once("includes/head.php");
 
 
             </div>
-
             <div class="container">
-                <div class="page-contain single-product">
-                    <div class="container">
+    <div class="page-contain single-product">
+        <div class="container">
 
-                        <!-- Main content -->
-                        <div id="main-content" class="main-content">
+            <!-- Main content -->
+            <div id="main-content" class="main-content">
 
-                            <?php
-                            foreach ($pro_datas as $pro_data) {
-
-
-                            ?>
-
+                <?php
+                // Remove the foreach loop
+                // foreach ($pro_datas as $pro_data) {
+                ?>
 
 
-                                <div>
-                                    <!-- summary info -->
-                                    <form action="addtocart.php" method="POST">
+                <!-- summary info -->
+                <form action="addtocart.php" method="POST">
 
-                                        <div class="sumary-product single-layout">
-                                            <div class="media">
-                                                <ul class="biolife-carousel slider-for" data-slick='{"arrows":false,"dots":false,"slidesMargin":30,"slidesToShow":1,"slidesToScroll":1,"fade":true,"asNavFor":".slider-nav"}'>
-                                                    <li><img src="admin/uploads/<?php echo $pro_data['pdt_img'] ?>" alt="" width="500" height="500"></li>
+                    <div class="sumary-product single-layout">
+                        <div class="media">
+                            <ul class="biolife-carousel slider-for" data-slick='{"arrows":false,"dots":false,"slidesMargin":30,"slidesToShow":1,"slidesToScroll":1,"fade":true,"asNavFor":".slider-nav"}'>
+                                <li><img src="admin/uploads/<?php echo $pro_data['pdt_img'] ?>" alt="" width="500" height="500"></li>
 
-                                                </ul>
+                            </ul>
 
-                                            </div>
-                                            <div class="product-attribute">
-                                                <h3 class="title"><?php echo $pro_data['pdt_name'] ?></h3>
-                                                <div class="rating">
-                                                   
-                                                    <b class="category"></b>
-                                                </div>
-                                                <span class="stock" style="margin-right: 200px;">Stock: <?php echo $pro_data['product_stock'] ?> </span>
-
-
-                                                <p class="excerpt"><?php echo $pro_data['pdt_des'] ?></p>
-                                                <div class="price">
-                                                    <ins><span class="price-amount"><span class="currencySymbol">Tk. </span><?php echo $pro_data['pdt_price'] ?></span></ins>
-
-                                                </div>
-
-                                                <div class="shipping-info">
-                                                    <p class="shipping-day">Shipping in 1h</p>
-                                                    <p class="for-today">Free Pickup Today</p>
-                                                </div>
-                                            </div>
-                                            <div class="action-form">
-
-                                                <div class="total-price-contain">
-                                                    <span class="title">Total Price:</span>
-                                                    <p class="price">Tk.
-                                                        <?php
-
-                                                        echo $pro_data['pdt_price'];
-
-                                                        ?>
-
-
-                                                    </p>
-                                                </div>
-                                                <div class="buttons">
-                                                    <input type="hidden" name="pdt_name" value="<?php echo $pro_data['pdt_name'] ?>">
-
-                                                    <input type="hidden" name="pdt_price" value="<?php echo $pro_data['pdt_price'] ?>">
-
-                                                    <input type="hidden" name="pdt_img" value="<?php echo $pro_data['pdt_img'] ?>">
-                                                    <input type="hidden" name="pdt_id" value="<?php echo $pro_data['pdt_id'] ?>">
-
-                                                    <input type="submit" value="Add To Cart" class="btn btn-block btn-success" name="addtocart">
-
-                                                </div>
-
-                                    </form>
-
-                                    <div class="social-media">
-  
-                                    </div>
-                                    
-                                </div>
                         </div>
-                        </form>
+                        <div class="product-attribute">
+                            <h3 class="title"><?php echo $pro_data['pdt_name'] ?></h3>
+                            <div class="rating">
+                                <p class="star-rating"><span class="width-80percent"></span></p>
+                                <span class="review-count">(04 Reviews)</span>
+                                <span class="qa-text">Q&A</span>
+                                <b class="category">By: <?php echo $pro_data['ctg_name'] ?></b>
+                            </div>
+                            <span class="sku">Sku: <?php echo $pro_data['pdt_id'] ?></span>
+                            <span class="stock" style="margin-left: 200px;">Stock: <?php echo $pro_data['product_stock'] ?> </span>
 
-                        <!-- Tab info -->
+                            <p class="excerpt"><?php echo $pro_data['pdt_des'] ?></p>
+                            <div class="price">
+                                <ins><span class="price-amount"><span class="currencySymbol">Tk. </span><?php echo $pro_data['pdt_price'] ?></span></ins>
+                            </div>
 
+                            <div class="shipping-info">
+                                <p class="shipping-day">3-Day Shipping</p>
+                                <p class="for-today">Pree Pickup Today</p>
+                            </div>
+                        </div>
+                        <div class="action-form">
 
-                            <div class="tab-content">
-                              
-                                <div id="tab_1st" class="tab-contain review-tab">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
-   
-                                            </div>
+                            <div class="total-price-contain">
+                                <span class="title">Total Price:</span>
+                                <p class="price">Tk.
+                                    <?php
+                                    echo $pro_data['pdt_price'];
+                                    ?>
+                                </p>
+                            </div>
+                            <div class="buttons">
+                                <input type="hidden" name="pdt_name" value="<?php echo $pro_data['pdt_name'] ?>">
+                                <input type="hidden" name="pdt_price" value="<?php echo $pro_data['pdt_price'] ?>">
+                                <input type="hidden" name="pdt_img" value="<?php echo $pro_data['pdt_img'] ?>">
+                                <input type="hidden" name="pdt_id" value="<?php echo $pro_data['pdt_id'] ?>">
+                                <input type="submit" value="Add To Cart" class="btn btn-block btn-success" name="addtocart">
+                            </div>
 
+                    </div>
+                    </form>
 
+                    <div class="social-media">
+                        <ul class="social-list">
+                            <li><a href="#" class="social-link"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                            <li><a href="www.facebook.com" class="social-link"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            <li><a href="#" class="social-link"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+                            <li><a href="#" class="social-link"><i class="fa fa-share-alt" aria-hidden="true"></i></a></li>
+                            <li><a href="#" class="social-link"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="acepted-payment-methods">
+                        <ul class="payment-methods">
+                            <li><img src="assets/images/card1.jpg" alt="" width="51" height="36"></li>
+                            <li><img src="assets/images/card2.jpg" alt="" width="51" height="36"></li>
+                            <li><img src="assets/images/card3.jpg" alt="" width="51" height="36"></li>
+                            <li><img src="assets/images/card4.jpg" alt="" width="51" height="36"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            </form>
 
-                                            <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12">
-                                                <?php
-                                                if (isset($_SESSION['user_id'])) {
-                                                ?>
+            <!-- Tab info -->
+            <div class="product-tabs single-layout biolife-tab-contain">
+                <!-- ... existing code ... -->
+            </div>
 
-                                                    <div class="review-form-wrapper">
-                                                        <span class="title">Submit your review</span>
-                                                        <form action="#" name="frm-review" method="post">
-                                                            <div class="comment-form-rating">
+            <!-- ... existing code ... -->
 
-                                                            <?php 
-                                                                if(isset($cmt_msg)){
-                                                                    echo '<script>alert("Thanks for your valuable feedback")</script>';
-                                                                }
-                                                            ?>
-                                                                <label>Your Comment about this products:</label>
-
-
-
-
-                                                            </div>
-
-
-
-
-                                                            <p class="form-row">
-                                                                <input type="hidden" value="<?php echo $_SESSION['user_id'] ?>" name="user_id">
-                                                                <input type="hidden" value="<?php echo  $_SESSION['username'] ?>" name="user_name">
-                                                                <input type="hidden" value="<?php echo $_GET['id'] ?>" name="pdt_id">
-
-                                                                <textarea name="comment" id="txt-comment" cols="30" rows="10" placeholder="Write your review here..." required></textarea>
-                                                            </p>
-
-
-                                                            <p class="">
-                                                                <input type="submit" name="post_comment" value="Post Comment" class="btn btn-success">
-                                                            </p>
-
-
-
-
-                                                        </form>
-                                                    </div>
-
-
-                                                <?php } ?>
-                                            </div>
-
-                                           
-
-
-                                        </div>
-                                        <div id="comments">
-                                            <ol class="commentlist">
-
-                                            <?php 
-                                            
-                                               
-                                        while($cmtinfo=mysqli_fetch_assoc($cmt_fetch)){
-                                                  
-                                            
-                                            ?>
-                                                <li class="review">
-                                                    <div class="comment-container">
-                                                        <div class="row">
-                                                            <div class="comment-content col-lg-8 col-md-9 col-sm-8 col-xs-12">
-
-                                                            <p class="comment-in"><span class="post-name"></span>
-                                                            <span class="post-date"><?php echo $cmtinfo['comment_date'] ?></span></p>
-                                                              
-                                                                
-                                                                <p class="author">by: <b><?php echo $cmtinfo['user_name'] ?></b></p>
-
-                                                                <p class="comment-text"><?php echo $cmtinfo['comment'] ?>.</p>
-
-                                                            </div>
-                                                            
-                                                        </div>
-                                                    </div>
-                                                </li>
-
-                                                <?php     
-                                            }
-                                            ?>
-                                                
-                                            </ol>
-                                            <div class="biolife-panigations-block version-2">
-                                                <ul class="panigation-contain">
-                                                    <li><span class="current-page">1</span></li>
-                                                    <li><a href="#" class="link-page">2</a></li>
-                                                    <li><a href="#" class="link-page">3</a></li>
-                                                    <li><span class="sep">....</span></li>
-                                                    <li><a href="#" class="link-page">20</a></li>
-                                                    <li><a href="#" class="link-page next"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                                                </ul>
-  
-                                            </div>
-                                        </div>
+            <!-- related products -->
+            <div class="product-related-box single-layout">
+                <div class="biolife-title-box lg-margin-bottom-26px-im">
+                    <span class="biolife-icon icon-organic"></span>
+                    <span class="subtitle">All the best item for You</span>
+                    <h3 class="main-title">Related Products</h3>
+                </div>
+                <ul class="products-list biolife-carousel nav-center-02 nav-none-on-mobile" data-slick='{"rows":1,"arrows":true,"dots":false,"infinite":false,"speed":400,"slidesMargin":0,"slidesToShow":5, "responsive":[{"breakpoint":1200, "settings":{ "slidesToShow": 4}},{"breakpoint":992, "settings":{ "slidesToShow": 3, "slidesMargin":20 }},{"breakpoint":768, "settings":{ "slidesToShow": 2, "slidesMargin":10}}]}'>
+                    <?php while ($r_pro = mysqli_fetch_assoc($rel_pro)) { ?>
+                        <li class="product-item">
+                            <div class="contain-product layout-default">
+                                <div class="product-thumb">
+                                    <a href="single_product.php?status=singleproduct&&id=<?php echo $r_pro['pdt_id'] ?>" class="link-to-product">
+                                        <img src="admin/uploads/<?php echo $r_pro['pdt_img'] ?>" alt="dd" width="270" height="270" class="product-thumnail">
+                                    </a>
+                                </div>
+                                <div class="info">
+                                    <b class="categories"><?php echo $r_pro['ctg_name'] ?></b>
+                                    <h4 class="product-title"><a href="single_product.php?status=singleproduct&&id=<?php echo $r_pro['pdt_id'] ?>" class="pr-name"> <?php echo $r_pro['pdt_name'] ?> </a></h4>
+                                    <div class="price">
+                                        <ins><span class="price-amount"><span class="currencySymbol">$</span>
+                                                <?php echo $r_pro['pdt_price'] ?>
+                                            </span></ins>
+                                    </div>
+                                    <div class="slide-down-box">
+                                        <p class="message">All products are carefully selected to ensure food safety.</p>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        
-
-
-
-
-                <?php } ?>
-                </div>
+                        </li>
+                    <?php } ?>
+                </ul>
             </div>
         </div>
+    </div>
+</div>
+
+<?php
+// Close the commented-out foreach loop
+// }
+?>
+
+
+
 
     </div>
 
