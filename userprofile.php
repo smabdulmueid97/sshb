@@ -98,100 +98,38 @@ include_once("includes/head.php");
                                             $_SESSION['cart_pdt_number']++;
                                             $order_names .= $value['pdt_name'] . "<br> ";
                                         ?>
-                                                <tr class="cart_item">
-                                                    <td class="product-thumbnail" data-title="Product Name">
-                                                        <a class="prd-thumb" href="single_product.php?status=singleproduct&&id=<?php echo $value['pdt_id'] ?>">
-                                                            <figure><img width="113" height="113" src="admin/uploads/<?php echo $value['pdt_img'] ?>" alt="shipping cart"></figure>
-                                                        </a>
-                                                        <a class="prd-name" href="single_product.php?status=singleproduct&&id=<?php echo $value['pdt_id'] ?>"><?php echo $value['pdt_name'] ?></a>
-
-                                                    </td>
-
-
-
-                                                    <td class="product-subtotal" data-title="Total">
-                                                        <div class="price price-contain">
-                                                            <ins><span class="price-amount"><?php echo $value['pdt_price'] ?>
-                                                                    <input type="hidden" class="pdt_price" value="<?php echo $value['pdt_price'] ?>">
-                                                                </span></ins>
-
-                                                        </div>
-                                                    </td>
-
-          
-
-                                                
-                                                    <td class="product-quantity" data-title="Quantity">
-                                                        <form action="" method="POST">
-
-
-                                                            <input class="btn btn-warning" type="submit" value="Remove" name="remove_product">
-                                                            <input type="hidden" value="<?php echo $value['pdt_name'] ?>" name="remove_pdt_name">
-                                                        </form>
-                                                    </td>
-
-                     <form class="shopping-cart-form" action="#" method="POST">
-
-                                                    <td class="product-price" data-title="Price">
-                                                        <?php $count=1; ?>
-                                                        <div class="">
-                                                            <input type="number" value="1" name="quantity" class="quantity" style="width: 65px;" id="quantity" min="1" max="10" onchange="subtotal(), totalOfAll()">
-
-                                                        </div>
-                                                    </td>
-
-
-                                                    <td class="product-subtotal" data-title="Total">
-                                                        <div class="price price-contain">
-                                                            <ins><span class="price-amount subtotal"> <?php echo $value['pdt_price'] ?> </span></ins>
-
-                                                        </div>
-                                                    </td>
-                                                </tr>
-
-
-
-
-
-                                        <?php }
-                                        } else {
-                                            echo "Your cart is empty";
-                                        } ?>
-
-
-                                      
-                                   
-                                        
-
-                                        <!-- <tr class="cart_item wrap-buttons">
-                                            <td>
-                                                <h3 style="color: black;">Payment</h3>
-                                            </td>
-
-                                            <form class="shopping-cart-form" action="#" method="POST">
-
-                                                <td colspan="3">
-                                                    <input type="text" style="border: none; width:100%;" placeholder="input bKash TXID" name="txid" required>
+                                            <tr class="cart_item">
+                                                <td class="product-thumbnail" data-title="Product Name">
+                                                    <a class="prd-thumb" href="single_product.php?status=singleproduct&&id=<?php echo $value['pdt_id'] ?>">
+                                                        <figure><img width="113" height="113" src="admin/uploads/<?php echo $value['pdt_img'] ?>" alt="shipping cart"></figure>
+                                                    </a>
+                                                    <a class="prd-name" href="single_product.php?status=singleproduct&&id=<?php echo $value['pdt_id'] ?>"><?php echo $value['pdt_name'] ?></a>
                                                 </td>
-
-                                        </tr> -->
-
-                                        <!-- <tr class="cart_item wrap-buttons">
-                                            <td>
-
-                                                <h3 style="color: black;">Shiping Address</h3>
-                                            </td>
-                                            <td colspan="3">
-
-
-                                                <input type="text" style="border: none; width:100%" placeholder="input courier service and location" name="shiping" required>
-                                            </td>
-
-                                        </tr> -->
-
-
-
-
+                                                <td class="product-subtotal" data-title="Total">
+                                                    <div class="price price-contain">
+                                                        <ins><span class="price-amount"><?php echo $value['pdt_price'] ?></span></ins>
+                                                    </div>
+                                                </td>
+                                                <td class="product-quantity" data-title="Quantity">
+                                                    <form action="" method="POST">
+                                                        <input class="btn btn-warning" type="submit" value="Remove" name="remove_product">
+                                                        <input type="hidden" value="<?php echo $value['pdt_name'] ?>" name="remove_pdt_name">
+                                                    </form>
+                                                </td>
+                                                <td class="product-price" data-title="Price">
+                                                    <form action="" method="POST">
+                                                        <input type="number" value="<?php echo $value['quantity'] ?>" name="quantity" class="quantity" style="width: 65px;" min="1" max="10" onchange="this.form.submit()">
+                                                        <input type="hidden" name="pdt_name" value="<?php echo $value['pdt_name'] ?>">
+                                                        <input type="hidden" name="update_quantity">
+                                                    </form>
+                                                </td>
+                                                <td class="product-subtotal" data-title="Total">
+                                                    <div class="price price-contain">
+                                                        <ins><span class="price-amount subtotal"><?php echo $subtotal ?></span></ins>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        <?php } ?>
                                     </tbody>
                                 </table>
                             </form>
