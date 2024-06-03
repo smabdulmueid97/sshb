@@ -211,31 +211,7 @@ include_once("includes/head.php");
                                    
                                         
 
-                                        <!-- <tr class="cart_item wrap-buttons">
-                                            <td>
-                                                <h3 style="color: black;">Payment</h3>
-                                            </td>
-
-                                            <form class="shopping-cart-form" action="#" method="POST">
-
-                                                <td colspan="3">
-                                                    <input type="text" style="border: none; width:100%;" placeholder="input bKash TXID" name="txid" required>
-                                                </td>
-
-                                        </tr> -->
-
-                                        <!-- <tr class="cart_item wrap-buttons">
-                                            <td>
-
-                                                <h3 style="color: black;">Shiping Address</h3>
-                                            </td>
-                                            <td colspan="3">
-
-
-                                                <input type="text" style="border: none; width:100%" placeholder="input courier service and location" name="shiping" required>
-                                            </td>
-
-                                        </tr> -->
+                                 
 
 
 
