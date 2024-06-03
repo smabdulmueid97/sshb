@@ -42,7 +42,6 @@ include_once("includes/head.php");
 ?>
 
 <body class="biolife-body">
-    <!-- Preloader -->
 
 
 
@@ -345,10 +344,7 @@ include_once("includes/head.php");
                                         <li><a href="#" class="link-page">20</a></li>
                                         <li><a href="#" class="link-page next"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
                                     </ul>
-                                    <div class="result-count">
-                                        <p class="txt-count"><b>1-5</b> of <b>126</b> reviews</p>
-                                        <a href="#" class="link-to">See all<i class="fa fa-caret-right" aria-hidden="true"></i></a>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>

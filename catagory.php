@@ -41,11 +41,7 @@ include_once("includes/head.php");
 ?>
 
 <body class="biolife-body">
-    <!-- Preloader -->
-
-    <?php
-    include_once("includes/preloader.php");
-    ?>
+    
 
     <!-- HEADER -->
     <header id="header" class="header-area style-01 layout-03">
