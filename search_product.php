@@ -112,7 +112,7 @@ include_once("includes/head.php");
 
                                             </div>
                                             <div class="shipping-info">
-                                                <p class="shipping-day">Shipping in 1h</p>
+                                                <p class="shipping-day">Shipping in 30 min</p>
                                                 <p class="for-today">Free Pickup Today</p>
                                             </div>
 
