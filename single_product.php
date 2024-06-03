@@ -229,7 +229,7 @@ include_once("includes/head.php");
                                     <b class="categories"><?php echo $r_pro['ctg_name'] ?></b>
                                     <h4 class="product-title"><a href="single_product.php?status=singleproduct&&id=<?php echo $r_pro['pdt_id'] ?>" class="pr-name"> <?php echo $r_pro['pdt_name'] ?> </a></h4>
                                     <div class="price">
-                                        <ins><span class="price-amount"><span class="currencySymbol">$</span>
+                                        <ins><span class="price-amount"><span class="currencySymbol">Tk.</span>
                                                 <?php echo $r_pro['pdt_price'] ?>
                                             </span></ins>
                                     </div>
