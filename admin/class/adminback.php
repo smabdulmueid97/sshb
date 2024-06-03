@@ -873,4 +873,13 @@ class  adminback
             return $result;
         }
     }
+    function delete_coupon($coupon_id)
+    {
+        $query = "DELETE FROM `cupon` WHERE `cupon_id` = $coupon_id";
+        if (mysqli_query($this->connection, $query)) {
+            return "Coupon deleted successfully";
+        } else {
+            return "Failed to delete coupon";
+        }
+    }
 }
