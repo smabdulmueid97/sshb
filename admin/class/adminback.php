@@ -73,50 +73,54 @@ class  adminback
         }
     }
 
-    function add_admin_user($data){
+    function add_admin_user($data)
+    {
         $user_email = $data['user_name'];
         $user_pass = md5($data['user_password']);
         $user_role = $data['user_role'];
 
         $query = "INSERT INTO `admin_info`( `admin_email`, `admin_pass`, `role`) VALUES ('$user_email','$user_pass',$user_role)";
 
-        if(mysqli_query($this->connection, $query)){
-            $msg="{$user_email} add as a user successfully";
+        if (mysqli_query($this->connection, $query)) {
+            $msg = "{$user_email} add as a user successfully";
             return $msg;
         }
     }
 
-    function show_admin_user(){
+    function show_admin_user()
+    {
         $query = "SELECT * FROM `admin_info`";
-        if(mysqli_query($this->connection, $query)){
+        if (mysqli_query($this->connection, $query)) {
             $result = mysqli_query($this->connection, $query);
             return $result;
         }
     }
 
-    function show_admin_user_by_id($user_id){
+    function show_admin_user_by_id($user_id)
+    {
         $query = "SELECT * FROM `admin_info` WHERE `admin_id`=$user_id";
-        if(mysqli_query($this->connection, $query)){
+        if (mysqli_query($this->connection, $query)) {
             $result = mysqli_query($this->connection, $query);
             return $result;
         }
     }
 
-    function update_admin($data){
+    function update_admin($data)
+    {
         $u_id = $data['user_id'];
         $u_email = $data['u-user-email'];
         $u_role = $data['u_user_role'];
         $query = "UPDATE `admin_info` SET `admin_email`='$u_email',`role`= $u_role WHERE `admin_id`= $u_id ";
-        if(mysqli_query($this->connection, $query)){
+        if (mysqli_query($this->connection, $query)) {
             $up_msg = "Udated successfully";
             return $up_msg;
         }
-        
     }
 
-    function delete_admin($admin_id){
+    function delete_admin($admin_id)
+    {
         $query = "DELETE FROM `admin_info` WHERE `admin_id`=$admin_id";
-        if(mysqli_query($this->connection, $query)){
+        if (mysqli_query($this->connection, $query)) {
             $del_msg = "User Deleted Successfully";
             return $del_msg;
         }
@@ -214,22 +218,20 @@ class  adminback
 
         if ($img_ext == "jpg" ||  $img_ext == 'jpeg' || $img_ext == "png") {
             if ($pdt_img_size <= 2e+6) {
-                
-                if($width<271 && $height<271){
+
+                if ($width < 271 && $height < 271) {
                     $query = "INSERT INTO `products`( `pdt_name`, `pdt_price`, `pdt_des`,`product_stock`, `pdt_ctg`, `pdt_img`, `pdt_status`) VALUES ('$pdt_name',$pdt_price,'$pdt_des',$pdt_stock,$pdt_ctg,'$pdt_img_name',$pdt_status)";
 
 
                     if (mysqli_query($this->connection, $query)) {
-                        move_uploaded_file($pdt_img_tmp, "uploads/".$pdt_img_name);
+                        move_uploaded_file($pdt_img_tmp, "uploads/" . $pdt_img_name);
                         $msg = "Product uploaded successfully";
                         return $msg;
                     }
-                }else{
+                } else {
                     $msg = "Sorry !! Pdt image max height: 271 px and width: 271 px, but you are trying {$width} px and {$height} px";
                     return $msg;
                 }
-
-
             } else {
                 $msg = "File size should not be large 2MB";
                 return $msg;
@@ -271,9 +273,8 @@ class  adminback
     {
         $query = "UPDATE `products` SET `pdt_status`='1' WHERE pdt_id=$id";
         if (mysqli_query($this->connection, $query)) {
-            
+
             return "Published Successfully";
-            
         }
     }
 
@@ -281,9 +282,8 @@ class  adminback
     {
         $query = "UPDATE `products` SET `pdt_status`='0' WHERE pdt_id=$id";
         if (mysqli_query($this->connection, $query)) {
-            
+
             return "Unpublished Successfully";
-            
         }
     }
 
@@ -314,14 +314,14 @@ class  adminback
 
         if ($img_ext == "jpg" ||  $img_ext == 'jpeg' || $img_ext == "png") {
             if ($pdt_img_size <= 2e+6) {
-               
-                if($width<271 && $height<271){
+
+                if ($width < 271 && $height < 271) {
 
                     $select_query = "SELECT * FROM `products` WHERE pdt_id=$pdt_id";
                     $result = mysqli_query($this->connection, $select_query);
                     $row = mysqli_fetch_assoc($result);
                     $pre_img = $row['pdt_img'];
-                    unlink("uploads/".$pre_img);
+                    unlink("uploads/" . $pre_img);
 
 
                     $query = "UPDATE `products` SET `pdt_name`=' $pdt_name',`pdt_price`='$pdt_price',`pdt_des`='$pdt_des',`pdt_ctg`='$pdt_ctg',`pdt_img`='$pdt_img_name',`product_stock`=$pdt_stock,`pdt_status`=$pdt_status WHERE pdt_id=$pdt_id";
@@ -329,16 +329,14 @@ class  adminback
 
                     if (mysqli_query($this->connection, $query)) {
 
-                        move_uploaded_file($pdt_img_tmp, "uploads/".$pdt_img_name);
+                        move_uploaded_file($pdt_img_tmp, "uploads/" . $pdt_img_name);
                         $msg = "Product Updated successfully";
                         return $msg;
                     }
-                }else{
+                } else {
                     $msg = "Sorry !! Pdt image max height: 271 px and width: 271 px, but you are trying {$width} px and {$height} px";
                     return $msg;
                 }
-
-
             } else {
                 $msg = "File size should not be large 2MB";
                 return $msg;
@@ -526,7 +524,8 @@ class  adminback
         }
     }
 
-    function confirm_order($post, $session){
+    function confirm_order($post, $session)
+    {
         $user_id = $post['user_id'];
         $order_status = $post['order_status'];
         $trans_id = $post['txid'];
@@ -534,20 +533,17 @@ class  adminback
         $shiping = $post['shiping'];
         $coupon = $_POST['coupon'];
 
-        foreach($session as $key){
+        foreach ($session as $key) {
             $pdt_name = $key['pdt_name'];
-            $pdt_price= $key['pdt_price'];
-            $pdt_id= $key['pdt_id'];
-            $pdt_quantity=$key['quantity'];
+            $pdt_price = $key['pdt_price'];
+            $pdt_id = $key['pdt_id'];
+            $pdt_quantity = $key['quantity'];
 
-           $query= "INSERT INTO `order_details`(`user_id`, `product_name`,`pdt_quantity`, `amount`,`uses_coupon`, `order_status`, `trans_id`, `Shipping_mobile`, `shiping`, `order_time`) VALUES ($user_id,'$pdt_name',$pdt_quantity, $pdt_price,'$coupon', $order_status,'$trans_id','$mobile','$shiping',NOW())";
-           $result= mysqli_query($this->connection, $query);
-           unset($_SESSION['cart']);
+            $query = "INSERT INTO `order_details`(`user_id`, `product_name`,`pdt_quantity`, `amount`,`uses_coupon`, `order_status`, `trans_id`, `Shipping_mobile`, `shiping`, `order_time`) VALUES ($user_id,'$pdt_name',$pdt_quantity, $pdt_price,'$coupon', $order_status,'$trans_id','$mobile','$shiping',NOW())";
+            $result = mysqli_query($this->connection, $query);
+            unset($_SESSION['cart']);
             header("location:exist_order.php");
-           
-
         }
-
     }
 
     function order_details_by_id($user_id)
@@ -669,7 +665,8 @@ class  adminback
         }
     }
 
-    function update_logo($data){
+    function update_logo($data)
+    {
         $lg_id = $data['id'];
 
         $lg_name = $_FILES['img']['name'];
@@ -689,7 +686,7 @@ class  adminback
                     $result = mysqli_query($this->connection, $select_query);
                     $row = mysqli_fetch_assoc($result);
                     $pre_img = $row['img'];
-                    unlink("uploads/".$pre_img);
+                    unlink("uploads/" . $pre_img);
 
 
                     $query = "UPDATE add_logo SET img='$lg_name' WHERE id=$lg_id";
@@ -699,7 +696,7 @@ class  adminback
                         $msg = "Logo  Updated successfully";
                         return $msg;
                     }
-                }else{
+                } else {
                     $msg = "Sorry !! Logo max height: 135px and width:36px, but you are trying {$width} px and {$height} px";
                     return $msg;
                 }
@@ -713,31 +710,34 @@ class  adminback
         }
     }
 
-    function SlideShow(){
+    function SlideShow()
+    {
         $query = "SELECT * FROM `slider`";
-        if(mysqli_query($this->connection, $query)){
+        if (mysqli_query($this->connection, $query)) {
             $row = mysqli_query($this->connection, $query);
             return $row;
         }
     }
 
-    
-    function slide_By_id($id){
+
+    function slide_By_id($id)
+    {
         $query = "SELECT * FROM `slider` WHERE `slider_id`=$id";
-        if(mysqli_query($this->connection, $query)){
+        if (mysqli_query($this->connection, $query)) {
             $row = mysqli_query($this->connection, $query);
             return $row;
         }
     }
 
-    function slider_update($data){
+    function slider_update($data)
+    {
         $slide_id = $data['slider_id'];
         $first_line = $data['first_line'];
         $second_line = $data['second_line'];
         $third_line = $data['third_line'];
         $btn_left = $data['btn_left'];
         $btn_right = $data['btn_right'];
-        
+
         $lg_name = $_FILES['slider_img']['name'];
         $lg_size = $_FILES['slider_img']['size'];
         $lg_tmp = $_FILES['slider_img']['tmp_name'];
@@ -755,7 +755,7 @@ class  adminback
                     $result = mysqli_query($this->connection, $select_query);
                     $row = mysqli_fetch_assoc($result);
                     $pre_img = $row['img'];
-                    unlink("uploads/".$pre_img);
+                    unlink("uploads/" . $pre_img);
 
 
                     $query = "UPDATE `slider` SET `first_line`='$first_line',`second_line`='$second_line',`third_line`='$third_line',`btn_left`='$btn_left',`btn_right`='$btn_right',`slider_img`='$lg_name ' WHERE `slider_id`=$slide_id";
@@ -765,7 +765,7 @@ class  adminback
                         $msg = "Slider  Updated successfully";
                         return $msg;
                     }
-                }else{
+                } else {
                     $msg = "Slider image must be Width: 1920px and height: 550px, but you are trying {$width} px and {$height} px";
                     return $msg;
                 }
@@ -780,70 +780,75 @@ class  adminback
     }
 
 
-    function post_comment($data){
+    function post_comment($data)
+    {
         $user_id = $data['user_id'];
         $user_name = $data['user_name'];
         $pdt_id = $data['pdt_id'];
         $user_comment =  $data['comment'];
 
         $query = "INSERT INTO `customer_feedback`(`user_id`, `user_name`, `pdt_id`, `comment`, `comment_date`) VALUES ($user_id,'$user_name',$pdt_id,'$user_comment',CURDATE())";
-        
-        if(mysqli_query($this->connection, $query)){
+
+        if (mysqli_query($this->connection, $query)) {
             $msg = "Thanks for your valuable feedback";
             return $msg;
         }
     }
 
-    function view_comment_id($id){
+    function view_comment_id($id)
+    {
         $query = "SELECT * FROM `customer_feedback` WHERE `pdt_id`=$id";
-        if(mysqli_query($this->connection, $query)){
+        if (mysqli_query($this->connection, $query)) {
             $result = mysqli_query($this->connection, $query);
 
-            if(mysqli_num_rows($result)>0){
+            if (mysqli_num_rows($result) > 0) {
                 return $result;
             }
-            
         }
     }
 
-    function view_comment_all(){
+    function view_comment_all()
+    {
         $query = "SELECT * FROM `customer_feedback`";
-        if(mysqli_query($this->connection, $query)){
+        if (mysqli_query($this->connection, $query)) {
             $result = mysqli_query($this->connection, $query);
 
-           return $result;
-            
+            return $result;
         }
     }
 
-    function edit_comment($cmt_id){
+    function edit_comment($cmt_id)
+    {
         $query = "SELECT * FROM `customer_feedback` WHERE `id` = $cmt_id";
 
-        if(mysqli_query($this->connection, $query)){
+        if (mysqli_query($this->connection, $query)) {
             $array = mysqli_query($this->connection, $query);
             return $array;
         }
     }
-    function update_comment($data){
+    function update_comment($data)
+    {
         $cmt_id = $data['cmt_id'];
         $comment = $data['u_comment'];
         $query = "UPDATE `customer_feedback` SET `comment`='$comment' WHERE `id`=$cmt_id";
-        if(mysqli_query($this->connection, $query)){
+        if (mysqli_query($this->connection, $query)) {
             $updata_msg = "Comment updated successfully";
             return $updata_msg;
         }
     }
 
-    function delete_comment($cmt_id){
+    function delete_comment($cmt_id)
+    {
         $query = "DELETE FROM `customer_feedback` WHERE `id`=$cmt_id";
 
-        if(mysqli_query($this->connection, $query)){
+        if (mysqli_query($this->connection, $query)) {
             $del_msg = "Comment deleted successfully";
             return $del_msg;
         }
     }
 
-    function add_coupon($data){
+    function add_coupon($data)
+    {
         $coupon_code = $data['cuopon_code'];
         $coupon_description = $data['cuopon_description'];
         $coupon_discount = $data['cuopon_discount'];
@@ -852,17 +857,18 @@ class  adminback
 
         $query = "INSERT INTO `cupon`( `cupon_code`, `description`, `discount`, `status`) VALUES ('$coupon_code','$coupon_description',$coupon_discount,$coupon_status)";
 
-        if(mysqli_query($this->connection, $query)){
+        if (mysqli_query($this->connection, $query)) {
 
-            
+
             $add_msg = "Coupon added successfully";
             return $add_msg;
         }
     }
 
-    function show_coupon(){
+    function show_coupon()
+    {
         $query = "SELECT * FROM `cupon`";
-        if(mysqli_query($this->connection, $query)){
+        if (mysqli_query($this->connection, $query)) {
             $result = mysqli_query($this->connection, $query);
             return $result;
         }
