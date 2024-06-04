@@ -1,71 +1,55 @@
+<?php
+// Database connection setup
+$dbhost = "localhost";
+$dbuser = "root";
+$dbpass = "";
+$dbname = "sshb";
 
-  
+$this->connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
-<?php 
+// Function to show coupons
+$show_coupon = $obj->show_coupon();
 
-    $catagories = $obj-> display_catagory();
+// Handle delete request
+if (isset($_GET['delete_id'])) {
+    $delete_id = $_GET['delete_id'];
+    $delete_query = "DELETE FROM cupon WHERE cupon_id = $delete_id";
+    $delete_result = mysqli_query($this->connection, $delete_query);
 
-    if(isset($_GET['status'])){
-        $get_id = $_GET['id'];
-        if($_GET['status']=="published"){
-            $obj->catagory_published($get_id);
-        }elseif($_GET['status']=="unpublished"){
-            $obj->catagory_unpublished($get_id);
-        }elseif($_GET['status']=="delete"){
-            $obj->delete_catagory($get_id);
-        }
+    if ($delete_result) {
+        echo "Coupon deleted successfully.";
+        // Refresh the page to reflect changes
+        header("Location: manage_coupon_view.php");
+        exit();
+    } else {
+        echo "Failed to delete coupon.";
     }
-   
-    
-
+}
 ?>
-<div >
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Catagory Name</th>
-                <th>Catagory Descriptiong</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-        </thead>
 
-        <tbody>
-           <?php while($ctg = mysqli_fetch_assoc($catagories)){ ?>
+<h2>Manage Coupon</h2>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Coupon Id</th>
+            <th>Coupon Code</th>
+            <th>Coupon Description</th>
+            <th>Coupon Discount</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        while ($result = mysqli_fetch_assoc($show_coupon)) {
+        ?>
             <tr>
-                <td><?php echo $ctg['ctg_id'] ?></td>
-                <td><?php echo $ctg['ctg_name'] ?></td>
-                <td><?php echo $ctg['ctg_des'] ?></td>
-                <td>
-                    <?php 
-                    if($ctg['ctg_status']==0)
-                    {echo "Unpublished";
-                    
-                         ?> 
-                         <a href="?status=published&&id=<?php echo $ctg['ctg_id'] ?>" class="btn btn-sm btn-success">Make Published</a>
-                        <?php
-                    } 
-                    else{echo "Published";
-                    
-                    ?>
-                     <a href="?status=unpublished&&id=<?php echo $ctg['ctg_id'] ?>" class="btn btn-sm btn-warning">Make Unpublished</a>
-                        <?php 
-                    }  
-                    
-                    ?>
-                
-                </td>
-                <td>
-                    <a href="edit_cata.php?status=edit&&id=<?php echo $ctg['ctg_id'] ?>" class="btn btn-sm btn-warning">Edit</a>
-                    <a href="?status=delete&&id=<?php echo $ctg['ctg_id'] ?>" class="btn btn-sm btn-danger">Delete</a>
-                </td>
-               
+                <td> <?php echo $result['cupon_id'] ?></td>
+                <td> <?php echo $result['cupon_code'] ?></td>
+                <td> <?php echo $result['description'] ?></td>
+                <td> <?php echo $result['discount'] ?></td>
+                <td><a href="manage_coupon_view.php?delete_id=<?php echo $result['cupon_id'] ?>" onclick="return confirm('Are you sure you want to delete this coupon?');">Delete</a> </td>
             </tr>
-            <?php 
-                }
-            ?>
-           
-        </tbody>
-    </table>
-</div>
+        <?php } ?>
+    </tbody>
+</table>
