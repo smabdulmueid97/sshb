@@ -48,7 +48,7 @@ if (isset($status_msg)) {
     </form>
 </div>
 
-<div>
+<div class="table-responsive">
     <table class="table table-striped">
         <thead>
             <tr>
@@ -111,3 +111,16 @@ if (isset($status_msg)) {
         </tbody>
     </table>
 </div>
+
+<style>
+    .table-responsive {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    @media (max-width: 768px) {
+        .table-responsive {
+            display: block;
+        }
+    }
+</style>
