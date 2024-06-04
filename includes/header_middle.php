@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-ini_set("display_errors","off");
+ini_set("display_errors", "off");
 
 if (isset($_POST['remove_product'])) {
     foreach ($_SESSION['cart'] as $key => $value) {
@@ -11,18 +11,18 @@ if (isset($_POST['remove_product'])) {
     }
 }
 
-    $obj=new adminback();
-   $logo_info = $obj->display_logo();
-   
+$obj = new adminback();
+$logo_info = $obj->display_logo();
+
 
 
 
 ?>
 
-<?php 
-    if(isset($del_msg)){
-        echo "{$del_msg}";
-    }
+<?php
+if (isset($del_msg)) {
+    echo "{$del_msg}";
+}
 ?>
 <div class="header-middle biolife-sticky-object ">
     <div class="container">
@@ -32,10 +32,10 @@ if (isset($_POST['remove_product'])) {
 
 
 
-    <?php while($logo = mysqli_fetch_assoc( $logo_info)) {
+                    <?php while ($logo = mysqli_fetch_assoc($logo_info)) {
 
-        ?>
-                    <img src="admin/uploads/<?php echo $logo['img']; ?>" alt="biolife logo" width="135" height="36">
+                    ?>
+                        <img src="admin/uploads/<?php echo $logo['img']; ?>" alt="biolife logo" width="135" height="36">
 
 
                 </a>
@@ -48,14 +48,14 @@ if (isset($_POST['remove_product'])) {
 
 
                         <li class="menu-item"><a href="index.php">Home</a></li>
-                        <li class="menu-item"><a href="all_product.php">All Product</a></li>
-                       
-                        <?php 
-                            if(isset($_SESSION['user_id'])){
-                                 ?>
-                                  <li class="menu-item"><a href="exist_order.php">Dashboard </a></li>
-                                 <?php
-                            }
+                        <li class="menu-item"><a href="all_product.php">Order From Menu</a></li>
+
+                        <?php
+                        if (isset($_SESSION['user_id'])) {
+                        ?>
+                            <li class="menu-item"><a href="exist_order.php">Dashboard </a></li>
+                        <?php
+                        }
                         ?>
 
 

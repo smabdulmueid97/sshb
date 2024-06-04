@@ -1,19 +1,18 @@
+<?php
+$cata_info = $obj->p_display_catagory();
 
-<?php 
-    $cata_info = $obj-> p_display_catagory();
-
-    if(isset($_POST['add_pdt'])){
-        $rtn_msg = $obj->add_product($_POST);
-    }
+if (isset($_POST['add_pdt'])) {
+    $rtn_msg = $obj->add_product($_POST);
+}
 ?>
 
 <h2>Add Product</h2>
 <h6 class="text-success">
-   <?php 
-     if(isset($rtn_msg)){
-         echo $rtn_msg;
-     }
-   ?>
+    <?php
+    if (isset($rtn_msg)) {
+        echo $rtn_msg;
+    }
+    ?>
 
 </h6>
 <form action="" method="post" enctype="multipart/form-data" class="form">
@@ -41,12 +40,12 @@
     <div class="form-group">
         <label for="pdt_ctg">Product Catagories</label>
         <select name="pdt_ctg" class="form-control">
-        <option value="">Select a Catagory</option>
+            <option value="">Select a Catagory</option>
 
-        <?php while($cata = mysqli_fetch_assoc($cata_info)){ ?>
-        <option value="<?php echo $cata['ctg_id'] ?>"><?php echo $cata['ctg_name'] ?></option>
+            <?php while ($cata = mysqli_fetch_assoc($cata_info)) { ?>
+                <option value="<?php echo $cata['ctg_id'] ?>"><?php echo $cata['ctg_name'] ?></option>
 
-        <?php }?>
+            <?php } ?>
         </select>
     </div>
 
