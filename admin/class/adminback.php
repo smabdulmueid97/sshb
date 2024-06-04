@@ -210,37 +210,21 @@ class  adminback
         $pdt_ctg = $data['pdt_ctg'];
         $pdt_status = $data['pdt_status'];
         $pdt_img_name = $_FILES['pdt_img']['name'];
-        $pdt_img_size = $_FILES['pdt_img']['size'];
         $pdt_img_tmp = $_FILES['pdt_img']['tmp_name'];
-        $img_ext = pathinfo($pdt_img_name, PATHINFO_EXTENSION);
 
-        list($width, $height) = getimagesize("$pdt_img_tmp");
+        $query = "INSERT INTO `products` (`pdt_name`, `pdt_price`, `pdt_des`, `product_stock`, `pdt_ctg`, `pdt_img`, `pdt_status`) 
+                  VALUES ('$pdt_name', $pdt_price, '$pdt_des', $pdt_stock, $pdt_ctg, '$pdt_img_name', $pdt_status)";
 
-        if ($img_ext == "jpg" ||  $img_ext == 'jpeg' || $img_ext == "png") {
-            if ($pdt_img_size <= 2e+6) {
-
-                if ($width < 271 && $height < 271) {
-                    $query = "INSERT INTO `products`( `pdt_name`, `pdt_price`, `pdt_des`,`product_stock`, `pdt_ctg`, `pdt_img`, `pdt_status`) VALUES ('$pdt_name',$pdt_price,'$pdt_des',$pdt_stock,$pdt_ctg,'$pdt_img_name',$pdt_status)";
-
-
-                    if (mysqli_query($this->connection, $query)) {
-                        move_uploaded_file($pdt_img_tmp, "uploads/" . $pdt_img_name);
-                        $msg = "Product uploaded successfully";
-                        return $msg;
-                    }
-                } else {
-                    $msg = "Sorry !! Pdt image max height: 271 px and width: 271 px, but you are trying {$width} px and {$height} px";
-                    return $msg;
-                }
-            } else {
-                $msg = "File size should not be large 2MB";
-                return $msg;
-            }
+        if (mysqli_query($this->connection, $query)) {
+            move_uploaded_file($pdt_img_tmp, "uploads/" . $pdt_img_name);
+            $msg = "Product uploaded successfully";
+            return $msg;
         } else {
-            $msg = "File shoul be jpg or png formate";
+            $msg = "Failed to upload product";
             return $msg;
         }
     }
+
 
     function display_product()
     {
