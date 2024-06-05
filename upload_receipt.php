@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['receipt'])) {
     $receipt = $_FILES['receipt'];
 
     // Validate file
-    $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
+    $allowed_types = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
     if (!in_array($receipt['type'], $allowed_types)) {
         die('Invalid file type. Only JPG, PNG, and GIF files are allowed.');
     }
