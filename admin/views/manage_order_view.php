@@ -112,10 +112,11 @@ if (isset($status_msg)) {
                     </td>
                     <td class="product-subtotal">
                         <?php if (!empty($order_info['receipt_upload'])) : ?>
-                            <a href="../admin/receipt_upload/<?php echo $order_info['receipt_upload']; ?>" target="_blank">View Receipt</a>
+                            <a href="../admin/receipt_upload/<?php echo $order_info['receipt_upload']; ?>" target="_blank" style="background-color: green; color: white; padding: 5px 10px; text-decoration: none;">View Receipt</a>
                         <?php else : ?>
-                            No Receipt
+                            <span style="background-color: pink; color: white; padding: 5px 10px;">No Receipt</span>
                         <?php endif; ?>
+
                     </td>
                     <td class="product-subtotal"><?php echo $order_info['order_time'] ?></td>
                 </tr>

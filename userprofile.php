@@ -155,7 +155,7 @@ include_once("includes/head.php");
                             </div>
                             <div class="btn-checkout">
                                 <form class="shopping-cart-form" action="" method="POST">
-                                    <input type="text" name="txid" placeholder="input bKash TXID">
+                                    <!-- <input type="text" name="txid" placeholder="input bKash TXID"> -->
                                     <input type="text" name="shipping_Mobile" class="form-control" value="<?php echo $_SESSION['mobile'] ?>" required>
                                     <textarea name="shiping" class="form-control" required><?php echo $_SESSION['address'] ?></textarea>
                                     <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'] ?>">

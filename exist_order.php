@@ -50,15 +50,21 @@ include_once("includes/head.php");
             <div class="container">
                 <div class="row">
                     <div class="col-md-2">
-                        <h4>Hello <?php
-                                    if (isset($username)) {
-                                        echo strtoupper($username);
-                                    }
-                                    ?></h4>
-                        <a href="?logout=logout">Logout</a>
+                        <h4> <?php
+                                if (isset($username)) {
+                                    echo strtoupper($username);
+                                }
+                                ?></h4>
+                        <h4>Go Cashless By<h4>
+                                <h4>Online Banking<h4>
+                                        <h4>+880174238940<h4>
+                                                <img src="admin\paymentQR\bkashQR.png" alt="Description of your image" width="200" height="200"><br>
+
+
+                                                <a href="?logout=logout">Logout</a>
                     </div>
                     <div class="col-md-10">
-                        <h2 class="text-center">Order Summary</h2>
+                        <h2 class="text-center">Cash On Delivery By Default, Unless Have Receipt</h2><br>
                         <table class="shop_table cart-form">
                             <thead>
                                 <tr>
@@ -68,7 +74,6 @@ include_once("includes/head.php");
                                     <th class="product-subtotal">Amount</th>
                                     <th class="product-subtotal">Order Status</th>
                                     <th class="product-subtotal">Placing Time</th>
-                                    <th class="product-subtotal">PayPal/Card</th>
                                     <th class="product-subtotal">Other Payment Receipt</th>
                                     <th class="product-subtotal">View Receipt</th>
                                 </tr>
@@ -120,12 +125,7 @@ include_once("includes/head.php");
                                                 <span class="price-amount"><?php echo $order_info['order_time'] ?></span>
                                             </div>
                                         </td>
-                                        <td class="product-subtotal" data-title="PayPal/Card">
-                                            <form action="process_paypal_payment.php" method="POST">
-                                                <input type="hidden" name="order_id" value="<?php echo $order_info['order_id']; ?>">
-                                                <button type="submit" class="btn btn-primary btn-sm">Pay Now</button>
-                                            </form>
-                                        </td>
+
                                         <td class="product-subtotal" data-title="Upload">
                                             <form action="upload_receipt.php" method="POST" enctype="multipart/form-data">
                                                 <input type="hidden" name="order_id" value="<?php echo $order_info['order_id']; ?>">
