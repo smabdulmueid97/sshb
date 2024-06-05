@@ -866,4 +866,16 @@ class  adminback
             return "Failed to delete coupon";
         }
     }
+    function get_receipt_by_order_id($order_id)
+    {
+        $query = "SELECT * FROM `payment` WHERE `order_id` = '$order_id'";
+        $result = mysqli_query($this->connection, $query);
+        return $result;
+    }
+    function save_receipt($order_id, $file_name)
+    {
+        $query = "INSERT INTO `payment` (`order_id`, `receipt_upload`) VALUES ('$order_id', '$file_name')
+                  ON DUPLICATE KEY UPDATE `receipt_upload` = '$file_name'";
+        return mysqli_query($this->connection, $query);
+    }
 }
