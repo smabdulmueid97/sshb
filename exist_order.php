@@ -55,13 +55,11 @@ include_once("includes/head.php");
                                     echo strtoupper($username);
                                 }
                                 ?></h4>
-                        <h4>Go Cashless By<h4>
-                                <h4>Online Banking<h4>
-                                        <h4>+880174238940<h4>
-                                                <img src="admin\paymentQR\bkashQR.png" alt="Description of your image" width="200" height="200"><br>
-
-
-                                                <a href="?logout=logout">Logout</a>
+                        <h4>Go Cashless By</h4>
+                        <h4>Online Banking</h4>
+                        <h4>+880174238940</h4>
+                        <img src="admin/paymentQR/bkashQR.png" alt="Description of your image" width="200" height="200"><br>
+                        <a href="?logout=logout">Logout</a>
                     </div>
                     <div class="col-md-10">
                         <h2 class="text-center">Cash On Delivery By Default, Unless Have Receipt</h2><br>
@@ -74,7 +72,8 @@ include_once("includes/head.php");
                                     <th class="product-subtotal">Amount</th>
                                     <th class="product-subtotal">Order Status</th>
                                     <th class="product-subtotal">Placing Time</th>
-                                    <th class="product-subtotal">Other Payment Receipt</th>
+                                    <th class="product-subtotal">Choose File</th>
+                                    <th class="product-subtotal">Upload</th>
                                     <th class="product-subtotal">View Receipt</th>
                                 </tr>
                             </thead>
@@ -126,11 +125,13 @@ include_once("includes/head.php");
                                             </div>
                                         </td>
 
-                                        <td class="product-subtotal" data-title="Upload">
+                                        <td class="product-subtotal" data-title="Choose File">
                                             <form action="upload_receipt.php" method="POST" enctype="multipart/form-data">
                                                 <input type="hidden" name="order_id" value="<?php echo $order_info['order_id']; ?>">
                                                 <input type="file" name="receipt" accept="image/*" required>
-                                                <button type="submit" class="btn btn-secondary btn-sm">Upload</button>
+                                        </td>
+                                        <td class="product-subtotal" data-title="Upload">
+                                            <button type="submit" class="btn btn-secondary btn-sm" style="background-color: #28a745; color: white;">Upload</button>
                                             </form>
                                         </td>
                                         <td class="product-subtotal" data-title="View Receipt">
@@ -138,9 +139,9 @@ include_once("includes/head.php");
                                             $receipt_query = $obj->get_receipt_by_order_id($order_info['order_id']);
                                             $receipt_info = mysqli_fetch_assoc($receipt_query);
                                             if ($receipt_info && !empty($receipt_info['receipt_upload'])) {
-                                                echo '<a href="admin/receipt_upload/' . $receipt_info['receipt_upload'] . '" target="_blank" class="btn btn-info btn-sm">View Receipt</a>';
+                                                echo '<a href="admin/receipt_upload/' . $receipt_info['receipt_upload'] . '" target="_blank" class="btn btn-info btn-sm" style="background-color: #17a2b8; color: white;">View Receipt</a>';
                                             } else {
-                                                echo '<p class="btn btn-outline-info btn-sm">No Receipt</p>';
+                                                echo '<p class="btn btn-outline-info btn-sm" style="color: #17a2b8;">No Receipt</p>';
                                             }
                                             ?>
                                         </td>
