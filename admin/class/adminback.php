@@ -16,6 +16,12 @@ class  adminback
             die("Databse connection error!!!");
         }
     }
+    public function get_payment_info($order_id)
+    {
+        $query = "SELECT receipt_upload FROM payment WHERE order_id = $order_id";
+        $result = mysqli_query($this->connection, $query);
+        return mysqli_fetch_assoc($result);
+    }
 
     function admin_login($data)
     {

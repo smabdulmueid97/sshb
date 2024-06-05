@@ -8,6 +8,10 @@ $all_order_info = $obj->all_order_info();
 // Initialize the order_infos array
 $order_infos = array();
 while ($all_order = mysqli_fetch_assoc($all_order_info)) {
+    // Fetch receipt_upload from the payment table
+    $order_id = $all_order['order_id'];
+    $payment_info = $obj->get_payment_info($order_id);
+    $all_order['receipt_upload'] = $payment_info['receipt_upload'] ?? null;
     $order_infos[] = $all_order;
 }
 
@@ -28,7 +32,7 @@ if (isset($_POST['search_order_id_btn'])) {
 
 // Handle the status update
 if (isset($_POST['update_status_btn'])) {
-    $status_msg =  $obj->updat_order_status($_POST);
+    $status_msg = $obj->updat_order_status($_POST);
 }
 
 if (isset($status_msg)) {
@@ -63,6 +67,7 @@ if (isset($status_msg)) {
                 <th class="product-subtotal">Shipping</th>
                 <th class="product-subtotal">Order Status</th>
                 <th class="product-subtotal">Update Status</th>
+                <th class="product-subtotal">Receipt Upload</th>
                 <th class="product-subtotal">Placing Time</th>
             </tr>
         </thead>
@@ -104,6 +109,13 @@ if (isset($status_msg)) {
                             <input type="hidden" name="order_id" value="<?php echo $order_info['order_id'] ?>">
                             <input type="submit" value="update" name="update_status_btn">
                         </form>
+                    </td>
+                    <td class="product-subtotal">
+                        <?php if (!empty($order_info['receipt_upload'])) : ?>
+                            <a href="../admin/receipt_upload/<?php echo $order_info['receipt_upload']; ?>" target="_blank">View Receipt</a>
+                        <?php else : ?>
+                            No Receipt
+                        <?php endif; ?>
                     </td>
                     <td class="product-subtotal"><?php echo $order_info['order_time'] ?></td>
                 </tr>
