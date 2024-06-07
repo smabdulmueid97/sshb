@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 04, 2024 at 05:53 PM
+-- Generation Time: Jun 07, 2024 at 04:26 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -154,7 +154,9 @@ INSERT INTO `customer_feedback` (`id`, `user_id`, `user_name`, `pdt_id`, `commen
 (9, 7, 'a', 5, 'not good', '2024-06-04'),
 (10, 7, 'a', 6, 'good', '2024-06-04'),
 (11, 7, 'a', 18, 'sweet', '2024-06-04'),
-(12, 7, 'a', 21, 'wow', '2024-06-04');
+(12, 7, 'a', 21, 'wow', '2024-06-04'),
+(13, 8, 't', 28, 'cake!!', '2024-06-05'),
+(14, 7, 'a', 22, 'good', '2024-06-05');
 
 -- --------------------------------------------------------
 
@@ -235,7 +237,39 @@ INSERT INTO `order_details` (`order_id`, `user_id`, `product_name`, `pdt_quantit
 (70, 8, 'Roti with Beef Curry', 1, 300, '', 2, '', '2147483647', 'rajshahi, borisal', '2024-06-04 15:48:57', '2024-06-04'),
 (71, 8, 'Alu Bhorta ', 1, 200, '', 0, '', '2147483647', 'rajshahi, borisal', '2024-06-04 15:48:57', '2024-06-04'),
 (72, 8, 'Khichuri', 1, 250, '', 0, '', '2147483647', 'rajshahi, borisal', '2024-06-04 15:48:57', '2024-06-04'),
-(73, 8, 'Rice and Chicken Curry', 1, 250, '', 0, '', '2147483647', 'rajshahi, borisal', '2024-06-04 15:48:57', '2024-06-04');
+(73, 8, 'Rice and Chicken Curry', 1, 250, '', 0, '', '2147483647', 'rajshahi, borisal', '2024-06-04 15:48:57', '2024-06-04'),
+(74, 7, 'Khichuri', 1, 250, '', 2, '', '123456789', 'dhaka, bangladesh', '2024-06-05 09:43:22', '2024-06-05'),
+(75, 7, 'Beef Somosa', 3, 90, '', 0, '', '123456789', 'dhaka, bangladesh', '2024-06-05 12:15:32', '2024-06-05'),
+(76, 7, 'Alu Bhorta ', 7, 1400, '', 0, '', '123456789w32424', 'dhaka, bangladesh,kalala', '2024-06-05 12:48:26', '2024-06-05'),
+(77, 7, 'BBQ', 2, 400, '', 0, '', '123456789', 'dhaka, bangladesh', '2024-06-05 13:06:37', '2024-06-05'),
+(78, 7, 'Rice and Chicken Curry', 2, 500, '', 0, '', '123456789', 'dhaka, bangladesh', '2024-06-05 13:06:37', '2024-06-05'),
+(79, 8, 'Fish fry', 2, 280, '', 0, '', '2147483647', 'rajshahi, borisal', '2024-06-05 13:17:50', '2024-06-05');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payment`
+--
+
+CREATE TABLE `payment` (
+  `payment_id` int(11) NOT NULL,
+  `order_id` int(255) NOT NULL,
+  `receipt_upload` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `payment`
+--
+
+INSERT INTO `payment` (`payment_id`, `order_id`, `receipt_upload`) VALUES
+(6, 74, '1715570002.png'),
+(7, 42, '1704449019.jpg'),
+(8, 75, '1715570002.png'),
+(9, 43, '1704449019.jpg'),
+(10, 75, '1704449019.webp'),
+(11, 44, '1704449019.webp'),
+(12, 44, '1715570002.png'),
+(13, 58, '1715570002.png');
 
 -- --------------------------------------------------------
 
@@ -259,22 +293,22 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`pdt_id`, `pdt_name`, `pdt_price`, `pdt_des`, `pdt_ctg`, `pdt_img`, `product_stock`, `pdt_status`) VALUES
-(1, 'Rice and Chicken Curry', 250, 'A harmonious blend of flavors, this curry is a symphony of spices, herbs, and tender chicken, all wrapped up in a flavorful sauce and served with a side of fluffy rice. The aroma of sautéed onions and garlic fills the air, enticing you to take a bite. The chicken is cooked to perfection, and the rice is cooked just right, making this dish a comforting and satisfying meal.\nEach mouthful is a symphony of textures and tastes, where the subtle nuttiness of the rice complements the rich, savory notes of the curry. Delve deeper, and you\'ll discover layers of complexity as the spices unfold on your palate, leaving a lingering warmth that is both comforting and invigorating.\n\nOur chefs craft this dish with utmost care and precision, ensuring that every bite is an experience to remember. Whether you\'re a connoisseur of Indian cuisine or simply seeking a culinary adventure, our Rice and Chicken Curry promises to delight your senses and leave you craving for more.\n\nIndulge in this culinary journey and let the enticing aroma and vibrant flavors whisk you away to a world of culinary bliss. Whether enjoyed as a hearty meal on its own or paired with your favorite accompaniments, our Rice and Chicken Curry is sure to satisfy your cravings and leave you craving for another serving.', 1, 'p1.jpg', 10, 1),
-(2, 'Khichuri', 250, 'A hearty and comforting dish, khichuri is a flavorful mix of rice and lentils, cooked to perfection and served with a hint of spices. The aroma of sautéed onions and garlic fills the air, enticing you to take a bite. The rice and lentils are cooked just right, making this dish a filling and satisfying meal.', 1, 'p2.jpg', 15, 1),
-(3, 'Alu Bhorta ', 200, 'A simple yet satisfying dish, alu bhorta is a flavorful mash of boiled potatoes, mixed with spices and herbs. The potatoes are cooked to perfection, and the spices add a subtle warmth, making this dish a comforting and satisfying snack.\nAs you take your first spoonful, the soft, fluffy potatoes melt in your mouth, releasing a gentle sweetness that\'s balanced by the subtle tang of the mustard oil. The aroma of the cilantro wafts up, teasing your senses and leaving you craving more. Whether served as a side dish or a light meal, Alu Bhorta is a true delight that\'s sure to become a favorite. So go ahead, indulge in this comforting treat and let the warmth of this beloved dish envelop you in its cozy embrace.', 1, 'p3.jpg', 10, 1),
-(4, 'Roti with Beef Curry', 300, 'A classic combination, roti and beef curry is a match made in heaven. The tender beef is cooked in a rich and spicy curry sauce, and served with a side of soft roti. The aroma of sautéed onions and garlic fills the air, enticing you to take a bite. The beef is cooked to perfection, and the roti is soft and fluffy, making this dish a comforting and satisfying meal.', 2, 'p4.jpg', 10, 1),
-(5, 'Dal Bhat', 100, 'A staple dish, dal bhat is a flavorful and filling combination of lentil soup and steamed rice. The aroma of sautéed onions and garlic fills the air, enticing you to take a bite. The lentils are cooked to perfection, and the rice is cooked just right, making this dish a comforting and satisfying meal.', 2, 'p5.jpg', 8, 1),
-(6, 'Luchi with Aloo Dom', 100, 'A popular street food, luchi and aloo dom is a crispy and flavorful combination of fried bread and spicy potato curry. The aroma of fried bread fills the air, enticing you to take a bite. The potato curry is spicy and flavorful, and the fried bread is crispy and crunchy, making this dish a delicious and satisfying snack.', 2, 'p6.jpg', 12, 1),
-(18, ' jilapi', 30, 'A sweet and crispy treat, jilapi is a popular dessert made with deep-fried batter and sugar. The aroma of fried batter fills the air, enticing you to take a bite. The sugar adds a sweet and sticky flavor, making this dish a delicious and satisfying treat.', 9, 'p11.jpg', 30, 1),
-(19, 'Fish fry', 140, 'A crispy and flavorful dish, fish fry is a popular snack made with tender fish, coated in a light batter and deep-fried to perfection. The aroma of fried fish fills the air, enticing you to take a bite. The fish is cooked to perfection, and the batter is crispy and crunchy, making this dish a delicious and satisfying snack.', 10, 'p7.jpg', 30, 1),
-(21, 'beef', 130, 'Beef - a rich and savory meat that\'s a staple in many cuisines around the world. With its tender texture and robust flavor, beef is a popular choice for many dishes, from hearty stews and roasts to juicy burgers and sandwiches.\n\nWhether grilled, sautéed, or slow-cooked, beef is a versatile ingredient that can be prepared in a variety of ways to suit any taste. From the rich flavor of a well-marbled ribeye to the tender bite of a lean sirloin, beef is a meat that\'s sure to please even the most discerning palate.', 10, 'p8.jpg', 30, 1),
+(1, 'Rice and Chicken Curry', 250, ' A classic combination where rice is served with a flavorful chicken curry, typically made with a mix of spices, tomatoes, and onions.', 1, 'p1.jpg', 10, 1),
+(2, 'Khichuri', 250, 'A popular South Asian dish made with rice and lentils. It can include vegetables and is often seasoned with spices like turmeric, cumin, and bay leaves.', 1, 'p2.jpg', 15, 1),
+(3, 'Alu Bhorta ', 200, 'A Bangladeshi mashed potato dish flavored with mustard oil, green chilies, and onions.', 1, 'p3.jpg', 10, 1),
+(4, 'Roti with Beef Curry', 300, 'Roti is a type of flatbread made from whole wheat flour, and it is often served with a spicy and rich beef curry.', 2, 'p4.jpg', 10, 1),
+(5, 'Dal Bhat', 100, 'A traditional South Asian meal consisting of lentil soup (dal) and rice (bhat).', 2, 'p5.jpg', 8, 1),
+(6, 'Luchi with Aloo Dom', 100, 'Luchi is a deep-fried flatbread made from refined flour, often served with Aloo Dom, a spicy potato curry.', 2, 'p6.jpg', 12, 1),
+(18, ' jilapi', 30, 'A sweet, deep-fried dessert made from a batter of wheat flour, which is then soaked in sugar syrup. Also known as jalebi.', 9, 'p11.jpg', 30, 1),
+(19, 'Fish fry', 140, 'Fish fillets or whole fish coated in a spiced batter or breading and deep-fried until crispy.', 10, 'p7.jpg', 30, 1),
+(21, 'beef', 130, 'Grilled or barbecued beef, typically marinated in spices and cooked over an open flame.', 10, 'p8.jpg', 30, 1),
 (22, 'BBQ', 200, 'BBQ - the sweet and tangy flavors of a perfectly grilled or smoked meat, infused with the rich aromas of spices and herbs. Whether it\'s a tender rack of ribs, a juicy burger, or a slow-cooked brisket, BBQ is a culinary delight that\'s sure to tantalize the taste buds.\n\nThe sweet and tangy flavors of the BBQ sauce mingle with the rich flavors of the meat, creating a harmonious balance of flavors that\'s both familiar and comforting. The aroma of smoked meat wafts through the air, teasing the senses and leaving you craving more.', 10, 'p9.jpg', 30, 1),
-(23, 'Rice & Fish ', 190, 'Rice & Fish - a match made in heaven! The fluffy, tender rice provides the perfect canvas for the delicate, flaky fish. The subtle sweetness of the rice complements the savory flavor of the fish, creating a harmonious balance of flavors that\'s both familiar and comforting.\n\nThe aroma of the fish wafts up, enticing you to take a bite. The rice is cooked to perfection, with a subtle crunch that gives way to a soft, fluffy interior. The fish is cooked just right, with a tender flake that melts in your mouth.', 9, 'p10.jpg', 30, 1),
-(24, 'Somosa', 20, 'Somosa - the crispy, golden-brown pastry that\'s a staple of many cuisines around the world. The delicate layers of dough are filled with a savory mixture of spices, herbs, and sometimes meat or vegetables, creating a flavor profile that\'s both familiar and comforting.\n\nAs you take your first bite, the crispy exterior gives way to a soft, fluffy interior that\'s infused with the aromas of spices and herbs. The flavors meld together in a harmonious balance of sweet and savory, with a subtle crunch from the crispy pastry.', 1, 'p12.jpg', 30, 1),
-(25, 'Singara', 20, 'Singara - the crispy, golden-brown pastry that\'s a staple of many cuisines around the world. The delicate layers of dough are filled with a savory mixture of spices, herbs, and sometimes meat or vegetables, creating a flavor profile that\'s both familiar and comforting.\n\nAs you take your first bite, the crispy exterior gives way to a soft, fluffy interior that\'s infused with the aromas of spices and herbs. The flavors meld together in a harmonious balance of sweet and savory, with a subtle crunch from the crispy pastry.', 2, 'p13.jpg', 30, 1),
-(26, 'Beef Somosa', 30, 'Beef Somosa - a savory and satisfying treat that combines the crispy, golden-brown pastry of a traditional Somosa with the rich flavor of beef. The tender beef is cooked to perfection and wrapped in a delicate layer of dough, creating a flavor profile that\'s both familiar and comforting.\n\nAs you take your first bite, the crispy exterior gives way to a soft, fluffy interior that\'s infused with the rich flavors of the beef. The beef is tender and juicy, with a subtle sweetness that\'s balanced by the savory flavors of the spices and herbs.', 2, 'p14.jpg', 30, 1),
-(27, 'Puri', 20, 'Puri - the crispy, golden-brown bread that\'s a staple of many cuisines around the world. The delicate layers of dough are fried to perfection, creating a flavor profile that\'s both familiar and comforting.\n\nAs you take your first bite, the crispy exterior gives way to a soft, fluffy interior that\'s infused with the aromas of spices and herbs. The flavors meld together in a harmonious balance of sweet and savory, with a subtle crunch from the crispy bread.', 10, 'p15.jpg', 30, 1),
-(28, 'Cake', 90, 'Cake - the sweet and indulgent treat that\'s a staple of celebrations and celebrations around the world. The moist and fluffy texture is infused with the sweetness of sugar and the richness of butter, creating a flavor profile that\'s both familiar and comforting.\n\nAs you take your first bite, the sweetness of the cake melts in your mouth, releasing a burst of flavors that\'s both rich and decadent. The texture is soft and fluffy, with a subtle crumb that\'s both tender and satisfying.', 1, 'p16.jpg', 30, 1);
+(23, 'Rice & Fish ', 190, 'A staple meal in many parts of the world, particularly in South Asia, where rice is paired with a variety of fish preparations.', 9, 'p10.jpg', 30, 1),
+(24, 'Somosa', 20, 'A fried or baked pastry with a savory filling, such as spiced potatoes, peas, and sometimes meat.', 1, 'p12.jpg', 30, 1),
+(25, 'Singara', 20, 'Similar to samosas, singaras are filled pastries, often with a spiced potato and pea filling, popular in Bengal.', 2, 'p13.jpg', 30, 1),
+(26, 'Beef Somosa', 30, ' A variation of the samosa filled with spiced ground beef.', 2, 'p14.jpg', 30, 1),
+(27, 'Puri', 20, 'A deep-fried bread made from unleavened wheat flour dough, often served with a variety of side dishes.', 10, 'p15.jpg', 30, 1),
+(28, 'Regular Cake', 90, 'Can come in various flavors and styles, such as sponge cakes, layer cakes, etc.', 1, 'p16.jpg', 30, 1);
 
 -- --------------------------------------------------------
 
@@ -315,8 +349,8 @@ CREATE TABLE `slider` (
 --
 
 INSERT INTO `slider` (`slider_id`, `first_line`, `second_line`, `third_line`, `btn_left`, `btn_right`, `slider_img`) VALUES
-(1, 'Welcome To SSHB Online', 'Fresh Breakfast One Click Away\n', 'We Can Delever In 30 min', 'Menu', 'Go Up', 's1.jpg '),
-(2, 'Welcome To SSHB Online', 'Fresh Breakfast One Click Away\n', 'We Can Delevery In 30 min', 'Menu', 'Go Up', 's2.jpg ');
+(1, 'Welcome To SSHB Online', 'Fresh Breakfast One Click Away\n', 'We Can Deliver In 30 min', 'Menu', 'Go Up', 's1.jpg '),
+(2, 'Welcome To SSHB Online', 'Fresh Breakfast One Click Away\n', 'We Can Deliver In 30 min', 'Menu', 'Go Up', 's2.jpg ');
 
 -- --------------------------------------------------------
 
@@ -411,6 +445,13 @@ ALTER TABLE `order_details`
   ADD PRIMARY KEY (`order_id`);
 
 --
+-- Indexes for table `payment`
+--
+ALTER TABLE `payment`
+  ADD PRIMARY KEY (`payment_id`),
+  ADD KEY `order_id` (`order_id`);
+
+--
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
@@ -462,7 +503,7 @@ ALTER TABLE `cupon`
 -- AUTO_INCREMENT for table `customer_feedback`
 --
 ALTER TABLE `customer_feedback`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `header_info`
@@ -474,7 +515,13 @@ ALTER TABLE `header_info`
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `order_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `order_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+
+--
+-- AUTO_INCREMENT for table `payment`
+--
+ALTER TABLE `payment`
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -493,6 +540,16 @@ ALTER TABLE `slider`
 --
 ALTER TABLE `users`
   MODIFY `user_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `payment`
+--
+ALTER TABLE `payment`
+  ADD CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `order_details` (`order_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
