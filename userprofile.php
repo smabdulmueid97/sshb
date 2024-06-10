@@ -146,6 +146,7 @@ include_once("includes/head.php");
                             <div class="subtotal-line">
                                 <p class="stt-name">Use Coupon</p>
                                 <input type="text" name="coupon" id="cupon" class="form-control" style="width:40%; padding:5px; display:inline">
+                                <button type="button" onclick="applyCoupon()" class="btn btn-primary">Apply</button>
                                 <span class="stt-price" id="discount">0</span>
                             </div>
                             <hr>
@@ -155,17 +156,18 @@ include_once("includes/head.php");
                             </div>
                             <div class="btn-checkout">
                                 <form class="shopping-cart-form" action="" method="POST">
-                                    <!-- <input type="text" name="txid" placeholder="input bKash TXID"> -->
                                     <input type="text" name="shipping_Mobile" class="form-control" value="<?php echo $_SESSION['mobile'] ?>" required>
                                     <textarea name="shiping" class="form-control" required><?php echo $_SESSION['address'] ?></textarea>
                                     <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'] ?>">
                                     <input type="hidden" name="product_name" value="<?php echo $order_names ?>">
                                     <input type="hidden" name="product_item" value="<?php echo $_SESSION['cart_pdt_number'] ?>">
-                                    <input type="hidden" name="amount" value="<?php echo $_SESSION['subtotal'] ?>">
+                                    <input type="hidden" name="amount" id="finalAmount" value="<?php echo $_SESSION['subtotal'] ?>">
                                     <input type="hidden" name="order_status" value="0">
+                                    <input type="hidden" name="coupon" id="usedCoupon" value="">
                                     <input type="submit" class="btn btn-success btn-block btn-lg" value="Confirm Order" name="confirm_order">
                                 </form>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -191,37 +193,28 @@ include_once("includes/head.php");
             document.getElementById("afterdiscount").textContent = total;
         }
 
+        function applyCoupon() {
+            var couponCode = document.getElementById("cupon").value;
+            var price = document.getElementById("totalOfall").textContent;
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "json/coupon.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    var discount = parseFloat(xhr.responseText);
+                    var total = parseFloat(price) - discount;
+                    document.getElementById("discount").textContent = discount;
+                    document.getElementById("afterdiscount").textContent = total;
+                    document.getElementById("finalAmount").value = total;
+                    document.getElementById("usedCoupon").value = couponCode;
+                }
+            };
+            xhr.send("action=load_discount&cupon=" + couponCode + "&price=" + price);
+        }
+
+
         document.addEventListener('DOMContentLoaded', (event) => {
             updateTotal();
-
-            var quantities = document.querySelectorAll('.quantity');
-            quantities.forEach((element) => {
-                element.addEventListener('change', (event) => {
-                    updateTotal();
-                });
-            });
-
-            var couponInput = document.getElementById("cupon");
-            couponInput.addEventListener('input', (event) => {
-                var total = parseFloat(document.getElementById("totalOfall").textContent);
-                var discountElement = document.getElementById("discount");
-                var afterDiscountElement = document.getElementById("afterdiscount");
-
-                $.ajax({
-                    url: "json/coupon.php",
-                    method: "POST",
-                    data: {
-                        action: 'load_discount',
-                        cupon: couponInput.value,
-                        price: total
-                    },
-                    success: function(data) {
-                        var html = Math.round(data);
-                        discountElement.textContent = html;
-                        afterDiscountElement.textContent = total - parseInt(html);
-                    }
-                });
-            });
         });
     </script>
 </body>

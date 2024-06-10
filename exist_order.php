@@ -99,11 +99,12 @@ include_once("includes/head.php");
                                                 <ins><span class="price-amount"><span class="currencySymbol"></span><?php echo $order_info['pdt_quantity'] ?></span></ins>
                                             </div>
                                         </td>
-                                        <td class="product-subtotal" data-title="Total">
+                                        <td class="product-subtotal" data-title="Uses_Coupon">
                                             <div class="price price-contain">
-                                                <ins><span class="price-amount"><span class="currencySymbol">Tk. </span><?php echo $order_info['amount'] ?></span></ins>
+                                                <ins><span class="price-amount"><?php echo $order_info['uses_coupon'] ?> Tk</span></ins>
                                             </div>
                                         </td>
+
                                         <td class="product-subtotal" data-title="Total">
                                             <div class="">
                                                 <span class="price-amount">

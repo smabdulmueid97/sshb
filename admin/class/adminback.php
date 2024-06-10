@@ -490,27 +490,27 @@ class  adminback
         $order_status = $data['order_status'];
         $trans_id = $data['txid'];
         $mobile = $data['shipping_Mobile'];
+        $shipping = $data['shiping'];
 
-        $shiping = $data['shiping'];
-
-
-        $query = "INSERT INTO `order_details`(`user_id`, `product_name`, `product_item`, `amount`, `order_status`, `trans_id`,`Shipping_mobile`, `shiping`, `order_time`, `order_date`) VALUES ( $user_id,'$product_name',$product_item, $amount, $order_status,'$trans_id',$mobile,'$shiping',NOW(), CURDATE())";
+        $query = "INSERT INTO `order_details`(`user_id`, `product_name`, `product_item`, `amount`, `order_status`, `trans_id`, `Shipping_mobile`, `shiping`, `order_time`, `order_date`) VALUES ( $user_id,'$product_name',$product_item, $amount, $order_status,'$trans_id',$mobile,'$shipping',NOW(), CURDATE())";
 
         if (mysqli_query($this->connection, $query)) {
-
             unset($_SESSION['cart']);
             header("location:exist_order.php");
         }
     }
 
-    function confirm_order($post, $session)
+
+
+    public function confirm_order($post, $session)
     {
         $user_id = $post['user_id'];
         $order_status = $post['order_status'];
-        $trans_id = $post['txid'];
+        $trans_id = uniqid();
         $mobile = $post['shipping_Mobile'];
-        $shiping = $post['shiping'];
-        $coupon = $_POST['coupon'];
+        $shipping = $post['shiping'];
+        $coupon = $post['coupon'];
+        $final_amount = $post['amount'];
 
         foreach ($session as $key) {
             $pdt_name = $key['pdt_name'];
@@ -518,12 +518,21 @@ class  adminback
             $pdt_id = $key['pdt_id'];
             $pdt_quantity = $key['quantity'];
 
-            $query = "INSERT INTO `order_details`(`user_id`, `product_name`,`pdt_quantity`, `amount`,`uses_coupon`, `order_status`, `trans_id`, `Shipping_mobile`, `shiping`, `order_time`) VALUES ($user_id,'$pdt_name',$pdt_quantity, $pdt_price,'$coupon', $order_status,'$trans_id','$mobile','$shiping',NOW())";
+            $query = "INSERT INTO `order_details`(`user_id`, `product_name`, `pdt_quantity`, `amount`, `uses_coupon`, `order_status`, `trans_id`, `Shipping_mobile`, `shiping`, `order_time`) 
+                      VALUES ('$user_id', '$pdt_name', '$pdt_quantity', '$pdt_price', '$final_amount', '$order_status', '$trans_id', '$mobile', '$shipping', NOW())";
             $result = mysqli_query($this->connection, $query);
-            unset($_SESSION['cart']);
-            header("location:exist_order.php");
+
+            if (!$result) {
+                die("Query failed: " . mysqli_error($this->connection));
+            }
         }
+
+        unset($_SESSION['cart']);
+        header("location:exist_order.php");
     }
+
+
+
 
     function order_details_by_id($user_id)
     {
