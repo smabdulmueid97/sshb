@@ -16,9 +16,9 @@ while ($data = mysqli_fetch_assoc($cata_info)) {
 $pdt_info = $obj->view_all_product();
 
 $pdt_datas = array();
-        
-while($pdt_ftecth = mysqli_fetch_assoc($pdt_info)){
-            $pdt_datas[] = $pdt_ftecth;
+
+while ($pdt_ftecth = mysqli_fetch_assoc($pdt_info)) {
+    $pdt_datas[] = $pdt_ftecth;
 }
 
 
@@ -32,7 +32,7 @@ include_once("includes/head.php");
 ?>
 
 <body class="biolife-body">
-    
+
 
     <!-- HEADER -->
     <header id="header" class="header-area style-01 layout-03">
@@ -58,11 +58,11 @@ include_once("includes/head.php");
         <div id="main-content" class="main-content">
 
             <!--Hero Section-->
-          
+
 
 
             <!--Navigation section-->
-           
+
 
 
             <!-- Product -->
@@ -85,8 +85,8 @@ include_once("includes/head.php");
                                             </a>
                                         </div>
                                         <div class="info">
-                                        <b class="categories"> <?php echo $pdt_data['ctg_name'] ?> </b>
-                                            
+                                            <b class="categories"> <?php echo $pdt_data['ctg_name'] ?> </b>
+
                                             <h4 class="product-title"><a href="single_product.php?status=singleproduct&&id=<?php echo $pdt_data['pdt_id'] ?>" class="pr-name"><?php echo $pdt_data['pdt_name'] ?></a></h4>
                                             <div class="price">
                                                 <ins><span class="price-amount"><span class="currencySymbol">Tk. </span><?php echo $pdt_data['pdt_price'] ?></span></ins>

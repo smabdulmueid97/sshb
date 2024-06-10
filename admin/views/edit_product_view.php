@@ -1,6 +1,6 @@
 <?php
 
-ini_set("display_erros", "Off");
+ini_set("display_errors", "Off");
 $obj = new adminback();
 $cata_info = $obj->p_display_catagory();
 if (isset($_GET['prostatus'])) {
@@ -14,7 +14,6 @@ if (isset($_GET['prostatus'])) {
 if (isset($_POST['update_pdt'])) {
     $update_msg = $obj->update_product($_POST);
 }
-
 
 ?>
 <h4>Update Product</h4>
@@ -36,30 +35,29 @@ if (isset($update_msg)) {
         <input type="text" name="u_pdt_price" class="form-control" value="<?php echo $pdt['pdt_price'] ?>">
     </div>
 
-    <!-- <div class="form-group">
+    <div class="form-group">
         <label for="pdt_des">Product Description</label>
-        <textarea name="u_pdt_des" cols="30" rows="10" class="form-control"><?php echo $pdt['pdt_des'] ?> </textarea>
-    </div> -->
+        <textarea name="u_pdt_des" cols="30" rows="10" class="form-control"><?php echo $pdt['pdt_des'] ?></textarea>
+    </div>
 
     <div class="form-group">
         <label for="pdt_stock">Product Stock</label>
         <input type="number" name="pdt_stock" class="form-control" max='30' min='1' value="<?php echo $pdt['product_stock'] ?>">
     </div>
 
-
     <div class="form-group">
-        <label for="pdt_ctg">Product Catagories</label>
+        <label for="pdt_ctg">Product Categories</label>
         <select name="u_pdt_ctg" class="form-control">
-            <option value="">Select a Catagory</option>
-
+            <option value="">Select a Category</option>
             <?php while ($cata = mysqli_fetch_assoc($cata_info)) { ?>
-                <option value="<?php echo $cata['ctg_id'] ?>"><?php echo $cata['ctg_name'] ?></option>
-
+                <option value="<?php echo $cata['ctg_id'] ?>" <?php if ($pdt['pdt_ctg'] == $cata['ctg_id']) {
+                                                                    echo "selected";
+                                                                } ?>>
+                    <?php echo $cata['ctg_name'] ?>
+                </option>
             <?php } ?>
         </select>
     </div>
-
-
 
     <div class="form-group">
         <label for="pdt_img">Product Image</label>

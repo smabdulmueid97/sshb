@@ -37,7 +37,7 @@ if (isset($_GET['prostatus'])) {
             <th>Product Name</th>
             <th>Product Price</th>
             <th>Product Image</th>
-            <th>Product Status</th>
+            <!-- <th>Product Status</th> -->
             <th>Product Category</th>
             <th>Action</th>
         </tr>
@@ -55,7 +55,7 @@ if (isset($_GET['prostatus'])) {
                 <td> <?php echo $pdt['pdt_name'] ?></td>
                 <td> <?php echo $pdt['pdt_price'] ?></td>
                 <td> <img style="height:60px" src="uploads/<?php echo $pdt['pdt_img'] ?>" alt=""> </td>
-                <td>
+                <!-- <td>
                     <?php
                     if ($pdt['pdt_status'] == 0) {
                         echo "Unpublished";
@@ -69,7 +69,7 @@ if (isset($_GET['prostatus'])) {
                     <?php
                     }
                     ?>
-                </td>
+                </td> -->
                 <td> <?php echo $pdt['ctg_name'] ?></td>
                 <td> <a href="edit_product.php?prostatus=edit&&id=<?php echo $pdt['pdt_id'] ?>">Edit</a> <br>
                     <a href="?prostatus=delete&&id=<?php echo $pdt['pdt_id'] ?>">Delete</a>
