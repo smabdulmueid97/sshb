@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 07, 2024 at 04:26 AM
+-- Generation Time: Jun 10, 2024 at 08:08 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -58,7 +58,8 @@ CREATE TABLE `admin_info` (
 
 INSERT INTO `admin_info` (`admin_id`, `admin_email`, `admin_pass`, `role`) VALUES
 (1, 'a@a.a', '81dc9bdb52d04dc20036dbd8313ed055', 1),
-(5, 't@t.t', '81dc9bdb52d04dc20036dbd8313ed055', 2);
+(5, 't@t.t', '81dc9bdb52d04dc20036dbd8313ed055', 2),
+(6, 'q@q.q', '81dc9bdb52d04dc20036dbd8313ed055', 2);
 
 -- --------------------------------------------------------
 
@@ -156,7 +157,8 @@ INSERT INTO `customer_feedback` (`id`, `user_id`, `user_name`, `pdt_id`, `commen
 (11, 7, 'a', 18, 'sweet', '2024-06-04'),
 (12, 7, 'a', 21, 'wow', '2024-06-04'),
 (13, 8, 't', 28, 'cake!!', '2024-06-05'),
-(14, 7, 'a', 22, 'good', '2024-06-05');
+(14, 7, 'a', 22, 'good', '2024-06-05'),
+(16, 7, 'a', 30, 'good\r\n', '2024-06-11');
 
 -- --------------------------------------------------------
 
@@ -243,7 +245,12 @@ INSERT INTO `order_details` (`order_id`, `user_id`, `product_name`, `pdt_quantit
 (76, 7, 'Alu Bhorta ', 7, 1400, '', 0, '', '123456789w32424', 'dhaka, bangladesh,kalala', '2024-06-05 12:48:26', '2024-06-05'),
 (77, 7, 'BBQ', 2, 400, '', 0, '', '123456789', 'dhaka, bangladesh', '2024-06-05 13:06:37', '2024-06-05'),
 (78, 7, 'Rice and Chicken Curry', 2, 500, '', 0, '', '123456789', 'dhaka, bangladesh', '2024-06-05 13:06:37', '2024-06-05'),
-(79, 8, 'Fish fry', 2, 280, '', 0, '', '2147483647', 'rajshahi, borisal', '2024-06-05 13:17:50', '2024-06-05');
+(79, 8, 'Fish fry', 2, 280, '', 0, '', '2147483647', 'rajshahi, borisal', '2024-06-05 13:17:50', '2024-06-05'),
+(80, 7, 'Khichuri', 4, 1000, '', 0, '', '123456789', 'dhaka, bangladesh', '2024-06-07 15:10:37', '2024-06-07'),
+(81, 7, 'Khichuri', 1, 250, '', 0, '', '123456789', 'dhaka, bangladesh', '2024-06-07 15:35:21', '2024-06-07'),
+(82, 7, 'Khichuri', 1, 250, '', 0, '', '123456789', 'dhaka, bangladesh', '2024-06-09 04:27:19', '2024-06-09'),
+(83, 10, 'BBQ', 2, 400, '', 1, '', '2147483647', 'johor, malaysia', '2024-06-10 16:19:25', '2024-06-11'),
+(84, 10, ' jilapi', 1, 30, '', 2, '', '2147483647', 'johor, malaysia', '2024-06-10 16:19:25', '2024-06-11');
 
 -- --------------------------------------------------------
 
@@ -269,7 +276,8 @@ INSERT INTO `payment` (`payment_id`, `order_id`, `receipt_upload`) VALUES
 (10, 75, '1704449019.webp'),
 (11, 44, '1704449019.webp'),
 (12, 44, '1715570002.png'),
-(13, 58, '1715570002.png');
+(13, 58, '1715570002.png'),
+(14, 83, '1715570002.png');
 
 -- --------------------------------------------------------
 
@@ -308,7 +316,8 @@ INSERT INTO `products` (`pdt_id`, `pdt_name`, `pdt_price`, `pdt_des`, `pdt_ctg`,
 (25, 'Singara', 20, 'Similar to samosas, singaras are filled pastries, often with a spiced potato and pea filling, popular in Bengal.', 2, 'p13.jpg', 30, 1),
 (26, 'Beef Somosa', 30, ' A variation of the samosa filled with spiced ground beef.', 2, 'p14.jpg', 30, 1),
 (27, 'Puri', 20, 'A deep-fried bread made from unleavened wheat flour dough, often served with a variety of side dishes.', 10, 'p15.jpg', 30, 1),
-(28, 'Regular Cake', 90, 'Can come in various flavors and styles, such as sponge cakes, layer cakes, etc.', 1, 'p16.jpg', 30, 1);
+(28, 'Regular Cake', 90, 'Can come in various flavors and styles, such as sponge cakes, layer cakes, etc.', 1, 'p16.jpg', 30, 1),
+(30, 'Ice cream vanina', 2000, 'udfgkasjlfsjdf w4uryweuirhkwjrhtkwrht89248274908374824\r\n\r\nefheoifhnaf\r\nsdfsdf\r\nsfsdfd\r\nf', 2, '140877-easy-eggless-strawberry-ice-cream-ddmfs-3x4-1-092e4d11b59049c8b3843014ea3c57f2.jpg', 20, 1);
 
 -- --------------------------------------------------------
 
@@ -378,7 +387,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `user_name`, `user_firstname`, `user_lastname`, `user_email`, `user_password`, `user_mobile`, `user_address`, `user_roles`, `created_at`, `modified_at`) VALUES
 (7, 'a', ' a', ' a', 'a@a.a', '81dc9bdb52d04dc20036dbd8313ed055', 123456789, 'dhaka, bangladesh', 5, '2024-06-04 04:04:53', '2024-06-04 04:04:53'),
-(8, 't', ' tim', ' kon', 't@t.t', '81dc9bdb52d04dc20036dbd8313ed055', 2147483647, 'rajshahi, borisal', 5, '2024-06-04 10:41:21', '2024-06-04 10:41:21');
+(8, 't', ' tim', ' kon', 't@t.t', '81dc9bdb52d04dc20036dbd8313ed055', 2147483647, 'rajshahi, borisal', 5, '2024-06-04 10:41:21', '2024-06-04 10:41:21'),
+(9, 'EzaFa', ' Eza', ' Fa', 's@s.s', '81dc9bdb52d04dc20036dbd8313ed055', 2147483647, 'kalabagal, foridpur', 5, '2024-06-09 03:23:05', '2024-06-09 03:23:05'),
+(10, 'Akmal', ' Akmal ', ' Hossin', 'q@q.q', '81dc9bdb52d04dc20036dbd8313ed055', 2147483647, 'johor, malaysia', 5, '2024-06-10 16:17:54', '2024-06-10 16:17:54');
 
 -- --------------------------------------------------------
 
@@ -485,13 +496,13 @@ ALTER TABLE `add_logo`
 -- AUTO_INCREMENT for table `admin_info`
 --
 ALTER TABLE `admin_info`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `catagory`
 --
 ALTER TABLE `catagory`
-  MODIFY `ctg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ctg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `cupon`
@@ -503,7 +514,7 @@ ALTER TABLE `cupon`
 -- AUTO_INCREMENT for table `customer_feedback`
 --
 ALTER TABLE `customer_feedback`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `header_info`
@@ -515,19 +526,19 @@ ALTER TABLE `header_info`
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `order_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `order_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `pdt_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `pdt_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `slider`
@@ -539,7 +550,7 @@ ALTER TABLE `slider`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `user_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
