@@ -1,8 +1,8 @@
 <?php
 $dbhost = "localhost";
-$dbuser = "root";
+$dbuser = "smabdulmueid97-app1";
 $dbpass = "Ld5vTApE9TKvXvhQdFxz";
-$dbname = "sshb";
+$dbname = "app1";
 
 $connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
