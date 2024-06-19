@@ -7,7 +7,7 @@ class  adminback
     {
         $dbhost = "localhost";
         $dbuser = "root";
-        $dbpass = "";
+        $dbpass = "Ld5vTApE9TKvXvhQdFxz";
         $dbname = "sshb";
 
         $this->connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);

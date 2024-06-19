@@ -1,7 +1,7 @@
 <?php
 $dbhost = "localhost";
 $dbuser = "root";
-$dbpass = "";
+$dbpass = "Ld5vTApE9TKvXvhQdFxz";
 $dbname = "sshb";
 
 $connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
