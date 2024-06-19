@@ -60,7 +60,7 @@ if (isset($update_msg)) {
     </div>
 
     <div class="form-group">
-        <label for="pdt_img">Product Image</label>
+        <label for="pdt_img">Product Image(Please Re-Upload Image!)</label>
         <div class="mb-3">
             <img src="uploads/<?php echo $pdt['pdt_img'] ?>" style="width: 80px;">
         </div>
