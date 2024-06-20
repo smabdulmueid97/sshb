@@ -365,33 +365,44 @@ class  adminback
 
     function user_register($data)
     {
-        $username = $data['username'];
-        $user_firstname = $data['user_firstname'];
-        $user_lastname = $data['user_lastname'];
-        $user_email = $data['user_email'];
-        $user_password = md5($data['user_password']);
-        $user_mobile = $data['user_mobile'];
-        $user_address = $data['user_address'];
-        $user_roles = $data['user_roles'];
+        $username = $this->sanitize_input($data['username']);
+        $user_firstname = $this->sanitize_input($data['user_firstname']);
+        $user_lastname = $this->sanitize_input($data['user_lastname']);
+        $user_email = $this->sanitize_input($data['user_email']);
+        $user_password = md5($this->sanitize_input($data['user_password']));
+        $user_mobile = $this->sanitize_input($data['user_mobile']);
+        $user_address = $this->sanitize_input($data['user_address']);
+        $user_roles = intval($data['user_roles']);
 
+        if (strlen($user_mobile) > 15) {
+            throw new Exception("Mobile number is too long.");
+        }
 
-        $user_check = "SELECT * FROM `users` WHERE user_name='$username' or user_email='$user_email'";
-
+        $user_check = "SELECT * FROM `users` WHERE user_name='$username' OR user_email='$user_email'";
         $mysqli_result = mysqli_query($this->connection, $user_check);
+
+        if (!$mysqli_result) {
+            throw new Exception("Error checking existing user: " . mysqli_error($this->connection));
+        }
 
         $row = mysqli_num_rows($mysqli_result);
 
-        if ($row == 1) {
-            $msg = "Username or email already exist";
-            return $msg;
+        if ($row > 0) {
+            return "Username or email already exists";
         } else {
-            $query = "INSERT INTO `users`( `user_name`, `user_firstname`, `user_lastname`, `user_email`, `user_password`, `user_mobile`,`user_address`, `user_roles`) VALUES ('$username',' $user_firstname',' $user_lastname','$user_email','$user_password',$user_mobile,'$user_address',$user_roles)";
+            $query = "INSERT INTO `users`(`user_name`, `user_firstname`, `user_lastname`, `user_email`, `user_password`, `user_mobile`, `user_address`, `user_roles`) VALUES ('$username', '$user_firstname', '$user_lastname', '$user_email', '$user_password', '$user_mobile', '$user_address', $user_roles)";
 
             if (mysqli_query($this->connection, $query)) {
-                $msg = "Your registration done";
-                return $msg;
+                return "Your registration is done";
+            } else {
+                throw new Exception("Error registering user: " . mysqli_error($this->connection));
             }
         }
+    }
+
+    private function sanitize_input($input)
+    {
+        return htmlspecialchars(strip_tags(trim($input)));
     }
 
 

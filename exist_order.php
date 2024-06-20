@@ -50,11 +50,9 @@ include_once("includes/head.php");
             <div class="container">
                 <div class="row">
                     <div class="col-md-2">
-                        <h4> <?php
-                                if (isset($username)) {
-                                    echo strtoupper($username);
-                                }
-                                ?></h4>
+                        <h4><?php if (isset($username)) {
+                                echo strtoupper($username);
+                            } ?></h4>
                         <h4>Go Cashless By</h4>
                         <h4>Online Banking</h4>
                         <h4>+880174238940</h4>
@@ -81,30 +79,29 @@ include_once("includes/head.php");
                                 <?php while ($order_info = mysqli_fetch_assoc($order_query)) { ?>
                                     <tr class="cart_item">
                                         <td class="product-thumbnail" data-title="Product Name">
-                                            <a class="prd-thumb" href="single_product.php?status=singleproduct&&id=<?php echo $order_info['order_id'] ?>">
-                                                <div class="price price-contain">
-                                                    <span class="price-amount"><?php echo $order_info['order_id'] ?></span>
-                                                </div>
-                                            </a>
+                                            <div class="price price-contain">
+                                                <a href="exist_order.php?order_id=<?php echo $order_info['order_id']; ?>">
+                                                    <span class="price-amount"><?php echo $order_info['order_id']; ?></span>
+                                                </a>
+                                            </div>
                                         </td>
                                         <td class="" data-title="Product Name">
-                                            <a class="" href="single_product.php?status=singleproduct&&id=<?php echo $order_info['order_id'] ?>" style="text-decoration: none; color:black">
-                                                <div class="price price-contain">
-                                                    <h5 class="text-left"><?php echo $order_info['product_name'] ?></h5>
-                                                </div>
-                                            </a>
+                                            <div class="price price-contain">
+                                                <a href="exist_order.php?order_id=<?php echo $order_info['order_id']; ?>">
+                                                    <h5 class="text-left"><?php echo $order_info['product_name']; ?></h5>
+                                                </a>
+                                            </div>
                                         </td>
                                         <td class="product-subtotal" data-title="Total">
                                             <div class="price price-contain">
-                                                <ins><span class="price-amount"><span class="currencySymbol"></span><?php echo $order_info['pdt_quantity'] ?></span></ins>
+                                                <ins><span class="price-amount"><span class="currencySymbol"></span><?php echo $order_info['pdt_quantity']; ?></span></ins>
                                             </div>
                                         </td>
                                         <td class="product-subtotal" data-title="Uses_Coupon">
                                             <div class="price price-contain">
-                                                <ins><span class="price-amount"><?php echo $order_info['uses_coupon'] ?> Tk</span></ins>
+                                                <ins><span class="price-amount"><?php echo $order_info['uses_coupon']; ?> Tk</span></ins>
                                             </div>
                                         </td>
-
                                         <td class="product-subtotal" data-title="Total">
                                             <div class="">
                                                 <span class="price-amount">
@@ -122,10 +119,9 @@ include_once("includes/head.php");
                                         </td>
                                         <td class="product-subtotal" data-title="Total">
                                             <div class="price price-contain">
-                                                <span class="price-amount"><?php echo $order_info['order_time'] ?></span>
+                                                <span class="price-amount"><?php echo $order_info['order_time']; ?></span>
                                             </div>
                                         </td>
-
                                         <td class="product-subtotal" data-title="Choose File">
                                             <form action="upload_receipt.php" method="POST" enctype="multipart/form-data">
                                                 <input type="hidden" name="order_id" value="<?php echo $order_info['order_id']; ?>">
@@ -167,6 +163,18 @@ include_once("includes/head.php");
     <?php
     include_once("includes/script.php");
     ?>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var noClickElements = document.querySelectorAll('.no-click');
+            noClickElements.forEach(function(element) {
+                element.addEventListener('click', function(event) {
+                    event.preventDefault();
+                });
+            });
+        });
+    </script>
+
 </body>
 
 </html>
