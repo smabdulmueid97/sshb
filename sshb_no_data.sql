@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 10, 2024 at 08:08 PM
+-- Generation Time: Jun 20, 2024 at 12:06 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -63,7 +63,7 @@ CREATE TABLE `all_order_info` (
 ,`shiping_address` varchar(255)
 ,`order_status` int(3)
 ,`order_time` timestamp
-,`order_date` date
+,`order_date` datetime
 );
 
 -- --------------------------------------------------------
@@ -141,7 +141,7 @@ CREATE TABLE `order_details` (
   `Shipping_mobile` varchar(20) NOT NULL,
   `shiping` varchar(255) NOT NULL,
   `order_time` timestamp NULL DEFAULT current_timestamp(),
-  `order_date` date DEFAULT current_timestamp()
+  `order_date` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
