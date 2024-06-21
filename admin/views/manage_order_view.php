@@ -111,11 +111,22 @@ if (isset($status_msg)) {
                         </form>
                     </td>
                     <td class="product-subtotal">
-                        <?php if (!empty($order_info['receipt_upload'])) : ?>
-                            <a href="../admin/receipt_upload/<?php echo $order_info['receipt_upload']; ?>" target="_blank" style="background-color: green; color: white; padding: 5px 10px; text-decoration: none;">View Receipt</a>
-                        <?php else : ?>
+                        <?php
+                        if (!empty($order_info['receipt_upload'])) {
+                            $file_extension = pathinfo($order_info['receipt_upload'], PATHINFO_EXTENSION);
+                            if (strtolower($file_extension) == 'html') {
+                                // If file type is HTML
+                                $receipt_url = '../receipt/' . $order_info['receipt_upload'];
+                            } else {
+                                // Default case for other file types
+                                $receipt_url = '../admin/receipt_upload/' . $order_info['receipt_upload'];
+                            }
+                        ?>
+                            <a href="<?php echo $receipt_url; ?>" target="_blank" style="background-color: green; color: white; padding: 5px 10px; text-decoration: none;">View Receipt</a>
+                        <?php } else { ?>
                             <span style="background-color: pink; color: white; padding: 5px 10px;">No Receipt</span>
-                        <?php endif; ?>
+                        <?php } ?>
+
 
                     </td>
                     <td class="product-subtotal"><?php echo $order_info['order_time'] ?></td>

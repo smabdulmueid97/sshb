@@ -5,9 +5,9 @@
 //     $obj = new adminback();
 
 $dbhost = "localhost";
-$dbuser = "smabdulmueid97-app1";
-$dbpass = "Ld5vTApE9TKvXvhQdFxz";
-$dbname = "app1";
+$dbuser = "root";
+$dbpass = "";
+$dbname = "sshb";
 
 $connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
