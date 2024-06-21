@@ -154,7 +154,7 @@ include_once("includes/head.php");
                                         </td>
 
                                         <td class="product-subtotal" data-title="PayPal"> <!-- PayPal Button Column -->
-                                            <a href="Paypal/payment.php?order_id=<?php echo $order_info['order_id']; ?>&amount=<?php echo $order_info['uses_coupon']; ?>" class="btn btn-primary btn-sm">Pay Now</a>
+                                            <a href="paypal/payment.php?order_id=<?php echo $order_info['order_id']; ?>&amount=<?php echo $order_info['uses_coupon']; ?>" class="btn btn-primary btn-sm">Pay Now</a>
                                         </td>
                                     </tr>
                                 <?php } ?>
